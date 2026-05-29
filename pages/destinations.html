@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Destinations - VoyageVista</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <nav class="navbar" aria-label="Navigation principale">
+      <a class="brand" href="../index.html" aria-label="Accueil VoyageVista">
+        <span class="brand-mark">V</span>
+        <span>VoyageVista</span>
+      </a>
+
+      <button class="menu-toggle" type="button" aria-label="Ouvrir le menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <ul class="nav-links">
+        <li><a href="../index.html">Accueil</a></li>
+        <li><a href="destinations.html" class="active">Destinations</a></li>
+        <li><a href="transports.html">Transports</a></li>
+        <li><a href="hebergements.html">Hebergements</a></li>
+        <li><a href="activites.html">Activites</a></li>
+        <li><a href="compte.html">Mon compte</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="page-hero compact-hero" aria-labelledby="page-title">
+      <div>
+        <p class="eyebrow">Catalogue premium</p>
+        <h1 id="page-title">Destinations d'exception</h1>
+        <p>
+          Explorez des sejours haut de gamme selectionnes pour leur confort, leur exclusivite et la qualite des experiences proposees.
+        </p>
+      </div>
+
+      <form class="mini-search" action="destinations.html" method="get">
+        <label>
+          <span>Recherche rapide</span>
+          <input type="search" name="destination" placeholder="Pays, ville, ambiance...">
+        </label>
+        <button class="btn-primary" type="submit">Filtrer</button>
+      </form>
+    </section>
+
+    <section class="catalog-layout" aria-label="Catalogue des destinations">
+      <aside class="filters-panel" aria-label="Filtres">
+        <div class="filters-title">
+          <h2>Filtres</h2>
+          <button type="button">Reinitialiser</button>
+        </div>
+
+        <div class="filter-group">
+          <h3>Continent</h3>
+          <label><input type="checkbox" checked> Europe</label>
+          <label><input type="checkbox" checked> Asie</label>
+          <label><input type="checkbox"> Afrique</label>
+          <label><input type="checkbox"> Ameriques</label>
+        </div>
+
+        <div class="filter-group">
+          <h3>Type</h3>
+          <label><input type="checkbox" checked> Plage</label>
+          <label><input type="checkbox"> Montagne</label>
+          <label><input type="checkbox"> Ville</label>
+        </div>
+
+        <div class="filter-group">
+          <h3>Budget par personne</h3>
+          <label><input type="radio" name="budget"> Moins de 1 500 EUR</label>
+          <label><input type="radio" name="budget" checked> 1 500 - 5 000 EUR</label>
+          <label><input type="radio" name="budget"> Plus de 5 000 EUR</label>
+        </div>
+
+        <div class="filter-group">
+          <h3>Duree</h3>
+          <label><input type="checkbox"> 3-5 jours</label>
+          <label><input type="checkbox" checked> 6-10 jours</label>
+          <label><input type="checkbox"> 11 jours et plus</label>
+        </div>
+      </aside>
+
+      <section class="catalog-results" aria-labelledby="results-title">
+        <div class="results-toolbar">
+          <div>
+            <p class="eyebrow">152 destinations trouvees</p>
+            <h2 id="results-title">Nos recommandations</h2>
+          </div>
+
+          <label class="sort-select">
+            <span>Trier par</span>
+            <select>
+              <option>Recommandes</option>
+              <option>Prix croissant</option>
+              <option>Note moyenne</option>
+              <option>Duree</option>
+            </select>
+          </label>
+        </div>
+
+        <article class="featured-destination">
+          <img class="featured-photo" src="https://images.unsplash.com/photo-1769389352398-f7b694034eb5?auto=format&fit=crop&w=1200&q=80" alt="Villas sur pilotis dans un lagon aux Maldives">
+          <div class="featured-content">
+            <span class="stay-tag">Coup de coeur</span>
+            <h3>Maldives, Ocean Indien</h3>
+            <p>Un sejour prive entre villa sur pilotis, diners sur la plage et excursions en bateau au coucher du soleil.</p>
+            <div class="feature-details">
+              <span>7 jours</span>
+              <span>Hotel 5 etoiles</span>
+              <span>A partir de 2 490 EUR</span>
+            </div>
+            <a class="btn-secondary" href="destination-detail.html">Voir la destination</a>
+          </div>
+        </article>
+
+        <div class="catalog-grid">
+          <article class="catalog-card">
+            <img class="catalog-photo" src="https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=900&q=80" alt="Temple traditionnel a Kyoto">
+            <div class="catalog-card-body">
+              <div class="rating">Note 4.9/5</div>
+              <h3>Kyoto, Japon</h3>
+              <p>Ryokan premium, temples prives et experiences gastronomiques.</p>
+              <div class="card-meta">
+                <span>8 jours</span>
+                <span>3 200 EUR</span>
+              </div>
+              <a href="destination-detail.html">Voir la destination</a>
+            </div>
+          </article>
+
+          <article class="catalog-card">
+            <img class="catalog-photo" src="https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?auto=format&fit=crop&w=900&q=80" alt="Maisons blanches et mer bleue a Santorini">
+            <div class="catalog-card-body">
+              <div class="rating">Note 4.8/5</div>
+              <h3>Santorini, Grece</h3>
+              <p>Suite vue mer, croisiere privee et diner panoramique.</p>
+              <div class="card-meta">
+                <span>6 jours</span>
+                <span>2 850 EUR</span>
+              </div>
+              <a href="destination-detail.html">Voir la destination</a>
+            </div>
+          </article>
+
+          <article class="catalog-card">
+            <img class="catalog-photo" src="https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&w=900&q=80" alt="Safari dans la savane du Kenya">
+            <div class="catalog-card-body">
+              <div class="rating">Note 4.9/5</div>
+              <h3>Safari Kenya</h3>
+              <p>Lodge exclusif, guide prive et safari photo au lever du jour.</p>
+              <div class="card-meta">
+                <span>7 jours</span>
+                <span>4 600 EUR</span>
+              </div>
+              <a href="destination-detail.html">Voir la destination</a>
+            </div>
+          </article>
+
+          <article class="catalog-card">
+            <img class="catalog-photo" src="https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=900&q=80" alt="Paysage tropical a Bali">
+            <div class="catalog-card-body">
+              <div class="rating">Note 4.8/5</div>
+              <h3>Bali, Indonesie</h3>
+              <p>Villa privee, spa quotidien et ceremonies culturelles.</p>
+              <div class="card-meta">
+                <span>10 jours</span>
+                <span>3 750 EUR</span>
+              </div>
+              <a href="destination-detail.html">Voir la destination</a>
+            </div>
+          </article>
+
+          <article class="catalog-card">
+            <img class="catalog-photo" src="https://images.unsplash.com/photo-1750859464437-b66433efd869?auto=format&fit=crop&w=900&q=80" alt="Riad luxueux avec piscine a Marrakech">
+            <div class="catalog-card-body">
+              <div class="rating">Note 4.6/5</div>
+              <h3>Marrakech, Maroc</h3>
+              <p>Riad 5 etoiles, hammam prive et table gastronomique.</p>
+              <div class="card-meta">
+                <span>5 jours</span>
+                <span>1 950 EUR</span>
+              </div>
+              <a href="destination-detail.html">Voir la destination</a>
+            </div>
+          </article>
+
+          <article class="catalog-card">
+            <img class="catalog-photo" src="https://images.unsplash.com/photo-1736390739590-72fccb016af0?auto=format&fit=crop&w=900&q=80" alt="Glacier et montagnes en Patagonie">
+            <div class="catalog-card-body">
+              <div class="rating">Note 4.9/5</div>
+              <h3>Patagonie, Argentine</h3>
+              <p>Lodge confidentiel, glaciers et randonnees guidees.</p>
+              <div class="card-meta">
+                <span>11 jours</span>
+                <span>4 100 EUR</span>
+              </div>
+              <a href="destination-detail.html">Voir la destination</a>
+            </div>
+          </article>
+        </div>
+
+        <div class="pagination" aria-label="Pagination">
+          <button type="button" class="active">1</button>
+          <button type="button">2</button>
+          <button type="button">3</button>
+          <button type="button">Suivant</button>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>VoyageVista - Plateforme de voyages premium</p>
+    <div>
+      <a href="#">Contact</a>
+      <a href="#">Mentions legales</a>
+    </div>
+  </footer>
+
+  <script src="../js/script.js"></script>
+</body>
+</html>

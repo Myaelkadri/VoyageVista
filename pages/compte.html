@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mon compte - VoyageVista</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <nav class="navbar" aria-label="Navigation principale">
+      <a class="brand" href="../index.html" aria-label="Accueil VoyageVista">
+        <span class="brand-mark">V</span>
+        <span>VoyageVista</span>
+      </a>
+
+      <button class="menu-toggle" type="button" aria-label="Ouvrir le menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <ul class="nav-links">
+        <li><a href="../index.html">Accueil</a></li>
+        <li><a href="destinations.html">Destinations</a></li>
+        <li><a href="transports.html">Transports</a></li>
+        <li><a href="hebergements.html">Hebergements</a></li>
+        <li><a href="activites.html">Activites</a></li>
+        <li><a href="compte.html" class="active">Mon compte</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="account-hero" aria-labelledby="page-title">
+      <div>
+        <p class="eyebrow">Acces securise</p>
+        <h1 id="page-title">Choisissez votre espace VoyageVista.</h1>
+        <p>
+          Selectionnez votre role pour acceder a l'espace adapte : voyageur, prestataire ou administrateur.
+        </p>
+      </div>
+    </section>
+
+    <section class="role-section" aria-label="Choix du role utilisateur">
+      <article class="role-card selected">
+        <span>Voyageur</span>
+        <h2>Composer et reserver</h2>
+        <p>Favoris, itineraires, panier, reservations et notifications.</p>
+      </article>
+      <article class="role-card">
+        <span>Prestataire</span>
+        <h2>Publier des offres</h2>
+        <p>Destinations, hebergements, activites, transports et disponibilites.</p>
+      </article>
+      <article class="role-card">
+        <span>Administrateur</span>
+        <h2>Superviser la plateforme</h2>
+        <p>Moderation des offres, gestion utilisateurs et reservations.</p>
+      </article>
+    </section>
+
+    <section class="account-layout" aria-label="Connexion et apercu compte">
+      <form class="login-panel" action="compte.html" method="get">
+        <p class="eyebrow">Connexion voyageur</p>
+        <h2>Acceder a mon compte</h2>
+        <label>
+          <span>Email</span>
+          <input type="email" name="email" placeholder="votre@email.com">
+        </label>
+        <label>
+          <span>Mot de passe</span>
+          <input type="password" name="password" placeholder="********">
+        </label>
+        <button class="btn-primary" type="submit">Se connecter</button>
+        <a href="#">Creer un compte</a>
+      </form>
+
+      <section class="dashboard-preview" aria-labelledby="dashboard-title">
+        <div class="results-toolbar">
+          <div>
+            <p class="eyebrow">Apercu espace voyageur</p>
+            <h2 id="dashboard-title">Tableau de bord</h2>
+          </div>
+        </div>
+
+        <div class="dashboard-grid">
+          <article class="dashboard-card">
+            <span>Reservation active</span>
+            <h3>Maldives premium</h3>
+            <p>15 au 22 juin 2026 · 2 adultes · Reference VV-2026-001</p>
+          </article>
+
+          <article class="dashboard-card">
+            <span>Panier</span>
+            <h3>6 960 EUR</h3>
+            <p>Vol business, hotel 5 etoiles et diner prive en attente de validation.</p>
+          </article>
+
+          <article class="dashboard-card">
+            <span>Favoris</span>
+            <h3>4 destinations</h3>
+            <p>Kyoto, Bali, Marrakech et Patagonie sauvegardees.</p>
+          </article>
+
+          <article class="dashboard-card">
+            <span>Notifications</span>
+            <h3>3 messages</h3>
+            <p>Confirmation, rappel J-7 et modification d'activite.</p>
+          </article>
+        </div>
+
+        <div class="management-grid">
+          <article>
+            <h3>Espace prestataire</h3>
+            <p>Gestion des offres publiees, disponibilites, prix et reservations recues.</p>
+            <a href="#">Voir le dashboard</a>
+          </article>
+          <article>
+            <h3>Espace admin</h3>
+            <p>Validation des offres en attente, gestion utilisateurs et supervision globale.</p>
+            <a href="#">Voir la moderation</a>
+          </article>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>VoyageVista - Plateforme de voyages premium</p>
+    <div>
+      <a href="#">Contact</a>
+      <a href="#">Mentions legales</a>
+    </div>
+  </footer>
+
+  <script src="../js/script.js"></script>
+</body>
+</html>

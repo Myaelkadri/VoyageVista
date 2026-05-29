@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hebergements - VoyageVista</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <nav class="navbar" aria-label="Navigation principale">
+      <a class="brand" href="../index.html" aria-label="Accueil VoyageVista">
+        <span class="brand-mark">V</span>
+        <span>VoyageVista</span>
+      </a>
+
+      <button class="menu-toggle" type="button" aria-label="Ouvrir le menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <ul class="nav-links">
+        <li><a href="../index.html">Accueil</a></li>
+        <li><a href="destinations.html">Destinations</a></li>
+        <li><a href="transports.html">Transports</a></li>
+        <li><a href="hebergements.html" class="active">Hebergements</a></li>
+        <li><a href="activites.html">Activites</a></li>
+        <li><a href="compte.html">Mon compte</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="page-hero compact-hero" aria-labelledby="page-title">
+      <div>
+        <p class="eyebrow">Hotels 4 et 5 etoiles</p>
+        <h1 id="page-title">Hebergements premium</h1>
+        <p>
+          Selectionnez des resorts, riads, lodges et suites haut de gamme adaptes a votre destination et a vos dates de sejour.
+        </p>
+      </div>
+
+      <form class="mini-search" action="hebergements.html" method="get">
+        <label>
+          <span>Destination</span>
+          <input type="search" name="destination" placeholder="Maldives, Marrakech...">
+        </label>
+        <button class="btn-primary" type="submit">Rechercher</button>
+      </form>
+    </section>
+
+    <section class="catalog-layout" aria-label="Catalogue des hebergements">
+      <aside class="filters-panel" aria-label="Filtres hebergements">
+        <div class="filters-title">
+          <h2>Filtres</h2>
+          <button type="button">Reinitialiser</button>
+        </div>
+
+        <div class="filter-group">
+          <h3>Categorie</h3>
+          <label><input type="checkbox" checked> Hotel 5 etoiles</label>
+          <label><input type="checkbox" checked> Villa privee</label>
+          <label><input type="checkbox"> Lodge premium</label>
+          <label><input type="checkbox"> Riad luxe</label>
+        </div>
+
+        <div class="filter-group">
+          <h3>Equipements</h3>
+          <label><input type="checkbox" checked> Piscine</label>
+          <label><input type="checkbox"> Spa</label>
+          <label><input type="checkbox"> Vue mer</label>
+          <label><input type="checkbox"> Conciergerie</label>
+        </div>
+
+        <div class="filter-group">
+          <h3>Prix par nuit</h3>
+          <label><input type="radio" name="price"> Moins de 300 EUR</label>
+          <label><input type="radio" name="price" checked> 300 - 900 EUR</label>
+          <label><input type="radio" name="price"> Plus de 900 EUR</label>
+        </div>
+      </aside>
+
+      <section class="catalog-results" aria-labelledby="results-title">
+        <div class="results-toolbar">
+          <div>
+            <p class="eyebrow">24 hebergements disponibles</p>
+            <h2 id="results-title">Selections recommandees</h2>
+          </div>
+          <label class="sort-select">
+            <span>Trier par</span>
+            <select>
+              <option>Meilleure note</option>
+              <option>Prix croissant</option>
+              <option>Capacite</option>
+              <option>Disponibilite</option>
+            </select>
+          </label>
+        </div>
+
+        <article class="featured-destination lodging-feature">
+          <img class="featured-photo" src="https://images.unsplash.com/photo-1573843981267-be1999ff37cd?auto=format&fit=crop&w=1200&q=80" alt="Villa de luxe sur pilotis aux Maldives">
+          <div class="featured-content">
+            <span class="stay-tag">Disponible</span>
+            <h3>Ocean Pearl Resort</h3>
+            <p>Villa sur pilotis avec piscine privee, acces direct au lagon, spa et service conciergerie 24h/24.</p>
+            <div class="feature-details">
+              <span>Maldives</span>
+              <span>2 adultes</span>
+              <span>890 EUR / nuit</span>
+            </div>
+            <a class="btn-secondary" href="destination-detail.html">Voir l'hebergement</a>
+          </div>
+        </article>
+
+        <div class="catalog-grid">
+          <article class="catalog-card">
+            <img class="catalog-photo" src="https://images.unsplash.com/photo-1750859464437-b66433efd869?auto=format&fit=crop&w=900&q=80" alt="Riad luxueux avec piscine a Marrakech">
+            <div class="catalog-card-body">
+              <div class="rating">Note 4.8/5</div>
+              <h3>Riad Almas</h3>
+              <p>Riad 5 etoiles avec patio, hammam prive et table marocaine gastronomique.</p>
+              <div class="card-meta">
+                <span>Marrakech</span>
+                <span>420 EUR/nuit</span>
+              </div>
+              <a href="#">Ajouter au sejour</a>
+            </div>
+          </article>
+
+          <article class="catalog-card">
+            <img class="catalog-photo" src="https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&w=900&q=80" alt="Suite hotel de luxe">
+            <div class="catalog-card-body">
+              <div class="rating">Note 4.7/5</div>
+              <h3>Azure Cliff Suites</h3>
+              <p>Suite vue mer avec terrasse privee, petit-dejeuner inclus et service voiturier.</p>
+              <div class="card-meta">
+                <span>Santorini</span>
+                <span>610 EUR/nuit</span>
+              </div>
+              <a href="#">Ajouter au sejour</a>
+            </div>
+          </article>
+
+          <article class="catalog-card">
+            <img class="catalog-photo" src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=900&q=80" alt="Hotel premium avec piscine">
+            <div class="catalog-card-body">
+              <div class="rating">Note 4.9/5</div>
+              <h3>Kyoto Garden Ryokan</h3>
+              <p>Ryokan premium, jardin prive, onsen et diner kaiseki servi en chambre.</p>
+              <div class="card-meta">
+                <span>Kyoto</span>
+                <span>540 EUR/nuit</span>
+              </div>
+              <a href="#">Ajouter au sejour</a>
+            </div>
+          </article>
+
+          <article class="catalog-card">
+            <img class="catalog-photo" src="https://images.unsplash.com/photo-1602002418082-a4443e081dd1?auto=format&fit=crop&w=900&q=80" alt="Villa tropicale avec piscine">
+            <div class="catalog-card-body">
+              <div class="rating">Note 4.8/5</div>
+              <h3>Bali Serenity Villa</h3>
+              <p>Villa privee avec piscine, chef a domicile et espace massage au calme.</p>
+              <div class="card-meta">
+                <span>Bali</span>
+                <span>390 EUR/nuit</span>
+              </div>
+              <a href="#">Ajouter au sejour</a>
+            </div>
+          </article>
+
+          <article class="catalog-card">
+            <img class="catalog-photo" src="https://images.unsplash.com/photo-1618773928121-c32242e63f39?auto=format&fit=crop&w=900&q=80" alt="Chambre hotel elegante">
+            <div class="catalog-card-body">
+              <div class="rating">Note 4.6/5</div>
+              <h3>Patagonia Glass Lodge</h3>
+              <p>Lodge panoramique avec vue montagne, cheminee et guides prives.</p>
+              <div class="card-meta">
+                <span>Patagonie</span>
+                <span>720 EUR/nuit</span>
+              </div>
+              <a href="#">Ajouter au sejour</a>
+            </div>
+          </article>
+
+          <article class="catalog-card">
+            <img class="catalog-photo" src="https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=900&q=80" alt="Suite hotel lumineuse">
+            <div class="catalog-card-body">
+              <div class="rating">Note 4.7/5</div>
+              <h3>Nairobi Safari Lodge</h3>
+              <p>Lodge 5 etoiles, terrasse savane, piscine et departs safari prives.</p>
+              <div class="card-meta">
+                <span>Kenya</span>
+                <span>680 EUR/nuit</span>
+              </div>
+              <a href="#">Ajouter au sejour</a>
+            </div>
+          </article>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>VoyageVista - Plateforme de voyages premium</p>
+    <div>
+      <a href="#">Contact</a>
+      <a href="#">Mentions legales</a>
+    </div>
+  </footer>
+
+  <script src="../js/script.js"></script>
+</body>
+</html>

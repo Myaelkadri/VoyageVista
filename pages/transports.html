@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Transports - VoyageVista</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <nav class="navbar" aria-label="Navigation principale">
+      <a class="brand" href="../index.html" aria-label="Accueil VoyageVista">
+        <span class="brand-mark">V</span>
+        <span>VoyageVista</span>
+      </a>
+
+      <button class="menu-toggle" type="button" aria-label="Ouvrir le menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <ul class="nav-links">
+        <li><a href="../index.html">Accueil</a></li>
+        <li><a href="destinations.html">Destinations</a></li>
+        <li><a href="transports.html" class="active">Transports</a></li>
+        <li><a href="hebergements.html">Hebergements</a></li>
+        <li><a href="activites.html">Activites</a></li>
+        <li><a href="compte.html">Mon compte</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="transport-hero" aria-labelledby="transport-title">
+      <div class="transport-hero-copy">
+        <p class="eyebrow">Planification des trajets</p>
+        <h1 id="transport-title">Voyagez confortablement, du depart a l'arrivee.</h1>
+        <p>
+          Comparez des options premium en avion, train, ferry ou voiture privee, puis ajoutez le trajet le plus coherent a votre sejour.
+        </p>
+      </div>
+    </section>
+
+    <section class="transport-search-section">
+      <form class="transport-search" action="transports.html" method="get">
+        <label>
+          <span>Depart</span>
+          <input type="text" name="depart" placeholder="Paris CDG">
+        </label>
+        <label>
+          <span>Destination</span>
+          <input type="text" name="destination" placeholder="Male, Maldives">
+        </label>
+        <label>
+          <span>Date aller</span>
+          <input type="date" name="aller">
+        </label>
+        <label>
+          <span>Date retour</span>
+          <input type="date" name="retour">
+        </label>
+        <label>
+          <span>Voyageurs</span>
+          <select name="voyageurs">
+            <option>1 voyageur</option>
+            <option selected>2 voyageurs</option>
+            <option>3 voyageurs</option>
+            <option>4 voyageurs</option>
+          </select>
+        </label>
+        <button class="btn-primary" type="submit">Rechercher</button>
+      </form>
+    </section>
+
+    <section class="transport-layout" aria-label="Resultats de transport">
+      <aside class="filters-panel transport-filters" aria-label="Filtres transport">
+        <div class="filters-title">
+          <h2>Filtres</h2>
+          <button type="button">Reinitialiser</button>
+        </div>
+
+        <div class="filter-group">
+          <h3>Type</h3>
+          <label><input type="checkbox" checked> Avion</label>
+          <label><input type="checkbox"> Train</label>
+          <label><input type="checkbox"> Ferry</label>
+          <label><input type="checkbox"> Voiture privee</label>
+        </div>
+
+        <div class="filter-group">
+          <h3>Classe</h3>
+          <label><input type="radio" name="classe"> Economique</label>
+          <label><input type="radio" name="classe" checked> Business</label>
+          <label><input type="radio" name="classe"> Premiere</label>
+        </div>
+
+        <div class="filter-group">
+          <h3>Duree totale</h3>
+          <label><input type="checkbox" checked> Moins de 12h</label>
+          <label><input type="checkbox"> 12h - 18h</label>
+          <label><input type="checkbox"> 18h et plus</label>
+        </div>
+      </aside>
+
+      <section class="transport-results" aria-labelledby="transport-results-title">
+        <div class="results-toolbar">
+          <div>
+            <p class="eyebrow">8 trajets disponibles</p>
+            <h2 id="transport-results-title">Options recommandees</h2>
+          </div>
+
+          <label class="sort-select">
+            <span>Trier par</span>
+            <select>
+              <option>Meilleur confort</option>
+              <option>Prix croissant</option>
+              <option>Duree la plus courte</option>
+              <option>Moins d'escales</option>
+            </select>
+          </label>
+        </div>
+
+        <article class="transport-card recommended">
+          <div class="transport-main">
+            <span class="stay-tag">Recommande</span>
+            <h3>Paris CDG → Male MLE</h3>
+            <p>Vol aller-retour en business class avec une escale courte a Doha.</p>
+            <div class="route-line">
+              <span>Paris CDG</span>
+              <strong>14h20</strong>
+              <span>Male MLE</span>
+            </div>
+          </div>
+          <div class="transport-side">
+            <span class="transport-type">Avion · Business</span>
+            <strong>1 840 EUR</strong>
+            <button class="btn-primary" type="button">Ajouter au sejour</button>
+          </div>
+        </article>
+
+        <article class="transport-card">
+          <div class="transport-main">
+            <span class="stay-tag">Direct premium</span>
+            <h3>Paris CDG → Dubai DXB</h3>
+            <p>Vol direct en premiere classe, ideal pour un sejour combine Dubai + Maldives.</p>
+            <div class="route-line">
+              <span>Paris CDG</span>
+              <strong>6h45</strong>
+              <span>Dubai DXB</span>
+            </div>
+          </div>
+          <div class="transport-side">
+            <span class="transport-type">Avion · Premiere</span>
+            <strong>2 950 EUR</strong>
+            <button class="btn-secondary" type="button">Voir details</button>
+          </div>
+        </article>
+
+        <article class="transport-card">
+          <div class="transport-main">
+            <span class="stay-tag">Europe luxe</span>
+            <h3>Paris Gare de Lyon → Venise</h3>
+            <p>Train de nuit premium avec cabine privee et service de restauration.</p>
+            <div class="route-line">
+              <span>Paris</span>
+              <strong>13h10</strong>
+              <span>Venise</span>
+            </div>
+          </div>
+          <div class="transport-side">
+            <span class="transport-type">Train · Cabine privee</span>
+            <strong>620 EUR</strong>
+            <button class="btn-secondary" type="button">Voir details</button>
+          </div>
+        </article>
+
+        <article class="transport-card">
+          <div class="transport-main">
+            <span class="stay-tag">Transfert prive</span>
+            <h3>Aeroport Male → Resort</h3>
+            <p>Bateau prive avec accueil personnalise et transfert direct vers la villa.</p>
+            <div class="route-line">
+              <span>Male</span>
+              <strong>45 min</strong>
+              <span>Resort</span>
+            </div>
+          </div>
+          <div class="transport-side">
+            <span class="transport-type">Bateau prive</span>
+            <strong>390 EUR</strong>
+            <button class="btn-secondary" type="button">Voir details</button>
+          </div>
+        </article>
+      </section>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>VoyageVista - Plateforme de voyages premium</p>
+    <div>
+      <a href="#">Contact</a>
+      <a href="#">Mentions legales</a>
+    </div>
+  </footer>
+
+  <script src="../js/script.js"></script>
+</body>
+</html>

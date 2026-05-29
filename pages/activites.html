@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Activites - VoyageVista</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <nav class="navbar" aria-label="Navigation principale">
+      <a class="brand" href="../index.html" aria-label="Accueil VoyageVista">
+        <span class="brand-mark">V</span>
+        <span>VoyageVista</span>
+      </a>
+
+      <button class="menu-toggle" type="button" aria-label="Ouvrir le menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <ul class="nav-links">
+        <li><a href="../index.html">Accueil</a></li>
+        <li><a href="destinations.html">Destinations</a></li>
+        <li><a href="transports.html">Transports</a></li>
+        <li><a href="hebergements.html">Hebergements</a></li>
+        <li><a href="activites.html" class="active">Activites</a></li>
+        <li><a href="compte.html">Mon compte</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="experience-hero" aria-labelledby="page-title">
+      <div class="experience-hero-copy">
+        <p class="eyebrow">Experiences premium</p>
+        <h1 id="page-title">Activites privees et moments rares.</h1>
+        <p>
+          Ajoutez a votre sejour des experiences selectionnees : gastronomie, bien-etre, culture, aventure et excursions privees.
+        </p>
+      </div>
+    </section>
+
+    <section class="catalog-layout" aria-label="Catalogue des activites">
+      <aside class="filters-panel" aria-label="Filtres activites">
+        <div class="filters-title">
+          <h2>Filtres</h2>
+          <button type="button">Reinitialiser</button>
+        </div>
+
+        <div class="filter-group">
+          <h3>Categorie</h3>
+          <label><input type="checkbox" checked> Gastronomie</label>
+          <label><input type="checkbox" checked> Bien-etre</label>
+          <label><input type="checkbox"> Culture</label>
+          <label><input type="checkbox"> Aventure</label>
+        </div>
+
+        <div class="filter-group">
+          <h3>Duree</h3>
+          <label><input type="checkbox"> Moins de 2h</label>
+          <label><input type="checkbox" checked> 2h - 4h</label>
+          <label><input type="checkbox"> Journee complete</label>
+        </div>
+
+        <div class="filter-group">
+          <h3>Participants</h3>
+          <label><input type="radio" name="participants" checked> Couple</label>
+          <label><input type="radio" name="participants"> Groupe prive</label>
+          <label><input type="radio" name="participants"> Famille</label>
+        </div>
+      </aside>
+
+      <section class="catalog-results" aria-labelledby="results-title">
+        <div class="results-toolbar">
+          <div>
+            <p class="eyebrow">18 activites disponibles</p>
+            <h2 id="results-title">Experiences recommandees</h2>
+          </div>
+          <label class="sort-select">
+            <span>Trier par</span>
+            <select>
+              <option>Plus populaires</option>
+              <option>Prix croissant</option>
+              <option>Duree</option>
+              <option>Places restantes</option>
+            </select>
+          </label>
+        </div>
+
+        <div class="experience-grid">
+          <article class="experience-card large-experience">
+            <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=1200&q=80" alt="Diner gastronomique prive">
+            <div>
+              <span class="stay-tag">Gastronomie</span>
+              <h3>Diner sous les etoiles</h3>
+              <p>Table privee sur la plage, menu degustation et service dedie pour deux personnes.</p>
+              <div class="feature-details">
+                <span>2h</span>
+                <span>2 participants</span>
+                <span>220 EUR</span>
+              </div>
+              <a class="btn-secondary" href="#">Ajouter au sejour</a>
+            </div>
+          </article>
+
+          <article class="experience-card">
+            <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=900&q=80" alt="Sortie snorkeling">
+            <div>
+              <span class="stay-tag">Aventure</span>
+              <h3>Snorkeling prive</h3>
+              <p>Guide local, recif protege et bateau reserve.</p>
+              <strong>480 EUR</strong>
+            </div>
+          </article>
+
+          <article class="experience-card">
+            <img src="https://images.unsplash.com/photo-1600334129128-685c5582fd35?auto=format&fit=crop&w=900&q=80" alt="Spa luxe">
+            <div>
+              <span class="stay-tag">Bien-etre</span>
+              <h3>Rituel spa duo</h3>
+              <p>Massage, hammam prive et soin signature.</p>
+              <strong>310 EUR</strong>
+            </div>
+          </article>
+
+          <article class="experience-card">
+            <img src="https://images.unsplash.com/photo-1470115636492-6d2b56f9146d?auto=format&fit=crop&w=900&q=80" alt="Croisiere coucher du soleil">
+            <div>
+              <span class="stay-tag">Croisiere</span>
+              <h3>Bateau au coucher du soleil</h3>
+              <p>Sortie privee avec coupe de champagne.</p>
+              <strong>560 EUR</strong>
+            </div>
+          </article>
+
+          <article class="experience-card">
+            <img src="https://images.unsplash.com/photo-1523906834658-6e24ef2386f9?auto=format&fit=crop&w=900&q=80" alt="Visite culturelle privee">
+            <div>
+              <span class="stay-tag">Culture</span>
+              <h3>Visite privee historique</h3>
+              <p>Guide francophone et acces coupe-file.</p>
+              <strong>180 EUR</strong>
+            </div>
+          </article>
+
+          <article class="experience-card">
+            <img src="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=900&q=80" alt="Randonee avec guide">
+            <div>
+              <span class="stay-tag">Nature</span>
+              <h3>Randonnee guidee</h3>
+              <p>Parcours panoramique avec guide expert.</p>
+              <strong>260 EUR</strong>
+            </div>
+          </article>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>VoyageVista - Plateforme de voyages premium</p>
+    <div>
+      <a href="#">Contact</a>
+      <a href="#">Mentions legales</a>
+    </div>
+  </footer>
+
+  <script src="../js/script.js"></script>
+</body>
+</html>
