@@ -2,7 +2,7 @@ CREATE DATABASE IF NOT EXISTS voyagevista
 CHARACTER SET utf8mb4
 COLLATE utf8mb4_general_ci;
 
-USE voyagevista;
+USE voyagevista; 
  
 CREATE TABLE utilisateur (
     id_utilisateur INT AUTO_INCREMENT PRIMARY KEY,
