@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prestataire - VoyageVista</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <nav class="navbar" aria-label="Navigation principale">
+      <a class="brand" href="../index.html"><span class="brand-mark">V</span><span>VoyageVista</span></a>
+      <ul class="nav-links">
+        <li><a href="compte.html">Mon compte</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="account-layout" aria-label="Espace prestataire">
+      <form class="login-panel" action="../backend/api/prestataire-create-activite.php" method="post" data-provider-form>
+        <p class="eyebrow">Nouvelle offre</p>
+        <h1>Ajouter une activité</h1>
+        <label><span>Nom</span><input type="text" name="nom_activite" required></label>
+        <label><span>Catégorie</span><input type="text" name="categorie" placeholder="Gastronomie"></label>
+        <label><span>Description</span><input type="text" name="description" required></label>
+        <label><span>Prix</span><input type="number" name="prix" min="1" required></label>
+        <label><span>Durée</span><input type="text" name="duree" placeholder="2h"></label>
+        <label><span>ID destination</span><input type="number" name="id_destination" value="1" min="1" required></label>
+        <button class="btn-primary" type="submit">Publier</button>
+        <p class="form-message" data-provider-message aria-live="polite"></p>
+      </form>
+
+      <section class="dashboard-preview">
+        <div class="results-toolbar">
+          <div>
+            <p class="eyebrow" data-provider-count>Chargement...</p>
+            <h2>Mes offres</h2>
+          </div>
+        </div>
+        <div class="dashboard-grid" data-provider-offers></div>
+      </section>
+    </section>
+  </main>
+
+  <script src="../js/script.js"></script>
+</body>
+</html>

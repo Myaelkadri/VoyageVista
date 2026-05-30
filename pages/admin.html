@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin - VoyageVista</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <nav class="navbar" aria-label="Navigation principale">
+      <a class="brand" href="../index.html"><span class="brand-mark">V</span><span>VoyageVista</span></a>
+      <ul class="nav-links">
+        <li><a href="compte.html">Mon compte</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="section">
+      <p class="eyebrow">Administration</p>
+      <h1>Supervision VoyageVista</h1>
+      <div class="dashboard-grid" data-admin-counts></div>
+      <div class="management-grid admin-list" data-admin-users></div>
+      <p class="form-message" data-admin-message aria-live="polite"></p>
+    </section>
+  </main>
+
+  <script src="../js/script.js"></script>
+</body>
+</html>

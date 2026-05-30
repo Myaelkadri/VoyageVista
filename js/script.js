@@ -518,3 +518,268 @@ if (bookingForm) {
     }
   });
 }
+
+const cartList = document.querySelector("[data-cart-list]");
+const cartCount = document.querySelector("[data-cart-count]");
+const cartMessage = document.querySelector("[data-cart-message]");
+
+function setTypedMessage(element, message, type = "info") {
+  if (!element) {
+    return;
+  }
+
+  element.textContent = message;
+  element.dataset.type = type;
+}
+
+function renderCart(items) {
+  if (!cartList) {
+    return;
+  }
+
+  if (cartCount) {
+    cartCount.textContent = `${items.length} réservation${items.length > 1 ? "s" : ""}`;
+  }
+
+  if (items.length === 0) {
+    cartList.innerHTML = `
+      <article class="dashboard-card">
+        <span>Panier vide</span>
+        <h3>Aucun séjour en attente</h3>
+        <p>Ajoutez une destination depuis le catalogue pour commencer.</p>
+      </article>
+    `;
+    return;
+  }
+
+  cartList.innerHTML = items.map((item) => `
+    <article class="cart-item">
+      <div>
+        <span class="stay-tag">${escapeHTML(item.statut_reservation)}</span>
+        <h3>${escapeHTML(item.titre)}</h3>
+        <p>${escapeHTML(item.date_debut)} au ${escapeHTML(item.date_fin)} · Référence ${escapeHTML(item.reference_reservation)}</p>
+      </div>
+      <div class="cart-actions">
+        <strong>${formatPrice(item.montant_total)} EUR</strong>
+        ${item.statut_reservation === "en_attente" ? `
+          <a class="btn-primary" href="paiement.html?id=${encodeURIComponent(item.id_reservation)}">Payer</a>
+          <button class="btn-secondary" type="button" data-delete-reservation="${escapeHTML(item.id_reservation)}">Retirer</button>
+        ` : `<span class="transport-type">Confirmée</span>`}
+      </div>
+    </article>
+  `).join("");
+}
+
+async function loadCart() {
+  if (!cartList) {
+    return;
+  }
+
+  try {
+    const response = await fetch("../backend/api/panier.php", { credentials: "include" });
+    const data = await response.json();
+    if (!response.ok || !data.success) {
+      throw new Error(data.message || "Connexion requise.");
+    }
+    renderCart(data.data);
+  } catch (error) {
+    setTypedMessage(cartMessage, error.message, "error");
+  }
+}
+
+if (cartList) {
+  loadCart();
+  cartList.addEventListener("click", async (event) => {
+    const button = event.target.closest("[data-delete-reservation]");
+    if (!button) {
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append("id_reservation", button.dataset.deleteReservation);
+
+    try {
+      const response = await fetch("../backend/api/delete-reservation.php", {
+        method: "POST",
+        body: formData,
+        credentials: "include",
+      });
+      const data = await response.json();
+      if (!response.ok || !data.success) {
+        throw new Error(data.message || "Suppression impossible.");
+      }
+      setTypedMessage(cartMessage, data.message, "success");
+      loadCart();
+    } catch (error) {
+      setTypedMessage(cartMessage, error.message, "error");
+    }
+  });
+}
+
+const paymentForm = document.querySelector("[data-payment-form]");
+const paymentReservation = document.querySelector("[data-payment-reservation]");
+const paymentMessage = document.querySelector("[data-payment-message]");
+const paymentSummary = document.querySelector("[data-payment-summary]");
+
+if (paymentForm) {
+  const params = new URLSearchParams(window.location.search);
+  const reservationId = params.get("id");
+  if (paymentReservation) {
+    paymentReservation.value = reservationId || "";
+  }
+  if (paymentSummary) {
+    paymentSummary.textContent = reservationId ? `Réservation #${reservationId}` : "Réservation non sélectionnée";
+  }
+
+  paymentForm.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    setTypedMessage(paymentMessage, "Paiement en cours...");
+
+    try {
+      const response = await fetch(paymentForm.action, {
+        method: "POST",
+        body: new FormData(paymentForm),
+        credentials: "include",
+      });
+      const data = await response.json();
+      if (!response.ok || !data.success) {
+        throw new Error(data.message || "Paiement impossible.");
+      }
+      setTypedMessage(paymentMessage, data.message, "success");
+    } catch (error) {
+      setTypedMessage(paymentMessage, error.message, "error");
+    }
+  });
+}
+
+const providerOffers = document.querySelector("[data-provider-offers]");
+const providerCount = document.querySelector("[data-provider-count]");
+const providerForm = document.querySelector("[data-provider-form]");
+const providerMessage = document.querySelector("[data-provider-message]");
+
+async function loadProviderOffers() {
+  if (!providerOffers) {
+    return;
+  }
+
+  try {
+    const response = await fetch("../backend/api/prestataire-offres.php", { credentials: "include" });
+    const data = await response.json();
+    if (!response.ok || !data.success) {
+      throw new Error(data.message || "Connexion prestataire requise.");
+    }
+
+    if (providerCount) {
+      providerCount.textContent = `${data.data.length} offres publiées`;
+    }
+
+    providerOffers.innerHTML = data.data.map((offer) => `
+      <article class="dashboard-card">
+        <span>${escapeHTML(offer.type)}</span>
+        <h3>${escapeHTML(offer.titre)}</h3>
+        <p>${escapeHTML(offer.nom_destination)} · ${formatPrice(offer.prix)} EUR</p>
+      </article>
+    `).join("");
+  } catch (error) {
+    setTypedMessage(providerMessage, error.message, "error");
+  }
+}
+
+if (providerForm) {
+  loadProviderOffers();
+  providerForm.addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    try {
+      const response = await fetch(providerForm.action, {
+        method: "POST",
+        body: new FormData(providerForm),
+        credentials: "include",
+      });
+      const data = await response.json();
+      if (!response.ok || !data.success) {
+        throw new Error(data.message || "Publication impossible.");
+      }
+      setTypedMessage(providerMessage, data.message, "success");
+      providerForm.reset();
+      loadProviderOffers();
+    } catch (error) {
+      setTypedMessage(providerMessage, error.message, "error");
+    }
+  });
+}
+
+const adminCounts = document.querySelector("[data-admin-counts]");
+const adminUsers = document.querySelector("[data-admin-users]");
+const adminMessage = document.querySelector("[data-admin-message]");
+
+function renderAdmin(data) {
+  if (!adminCounts || !adminUsers) {
+    return;
+  }
+
+  adminCounts.innerHTML = Object.entries(data.counts).map(([key, value]) => `
+    <article class="dashboard-card">
+      <span>${escapeHTML(key)}</span>
+      <h3>${formatPrice(value)}</h3>
+      <p>Éléments enregistrés</p>
+    </article>
+  `).join("");
+
+  adminUsers.innerHTML = data.users.map((user) => `
+    <article>
+      <h3>${escapeHTML(user.prenom)} ${escapeHTML(user.nom)}</h3>
+      <p>${escapeHTML(user.email)} · ${escapeHTML(user.role)} · ${escapeHTML(user.statut_compte)}</p>
+      <button class="btn-secondary" type="button" data-user-status="${escapeHTML(user.id_utilisateur)}" data-next-status="${user.statut_compte === "actif" ? "bloque" : "actif"}">
+        ${user.statut_compte === "actif" ? "Bloquer" : "Activer"}
+      </button>
+    </article>
+  `).join("");
+}
+
+async function loadAdmin() {
+  if (!adminCounts) {
+    return;
+  }
+
+  try {
+    const response = await fetch("../backend/api/admin-summary.php", { credentials: "include" });
+    const data = await response.json();
+    if (!response.ok || !data.success) {
+      throw new Error(data.message || "Connexion admin requise.");
+    }
+    renderAdmin(data.data);
+  } catch (error) {
+    setTypedMessage(adminMessage, error.message, "error");
+  }
+}
+
+if (adminCounts) {
+  loadAdmin();
+  adminUsers.addEventListener("click", async (event) => {
+    const button = event.target.closest("[data-user-status]");
+    if (!button) {
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append("id_utilisateur", button.dataset.userStatus);
+    formData.append("statut_compte", button.dataset.nextStatus);
+
+    try {
+      const response = await fetch("../backend/api/admin-update-user.php", {
+        method: "POST",
+        body: formData,
+        credentials: "include",
+      });
+      const data = await response.json();
+      if (!response.ok || !data.success) {
+        throw new Error(data.message || "Modification impossible.");
+      }
+      setTypedMessage(adminMessage, data.message, "success");
+      loadAdmin();
+    } catch (error) {
+      setTypedMessage(adminMessage, error.message, "error");
+    }
+  });
+}
