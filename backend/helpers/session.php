@@ -25,3 +25,15 @@ function requireUser(): array
 
     return $user;
 }
+
+function requireRole(string|array $roles): array
+{
+    $user = requireUser();
+    $allowedRoles = is_array($roles) ? $roles : [$roles];
+
+    if (!in_array($user['role'], $allowedRoles, true)) {
+        sendError('Accès refusé.', 403);
+    }
+
+    return $user;
+}
