@@ -35,15 +35,15 @@
   </header>
 
   <main>
-    <section class="detail-hero" aria-labelledby="destination-title">
+    <section class="detail-hero" aria-labelledby="destination-title" data-detail-hero>
       <div class="detail-hero-copy">
-        <a class="breadcrumb" href="destinations.html">Destinations / Ocean Indien</a>
+        <a class="breadcrumb" href="destinations.html" data-detail-breadcrumb>Destinations / Ocean Indien</a>
         <p class="eyebrow">Sejour premium</p>
-        <h1 id="destination-title">Maldives, villas sur pilotis</h1>
+        <h1 id="destination-title" data-detail-title>Maldives, villas sur pilotis</h1>
         <p>
-          Un voyage exclusif dans un lagon turquoise, pense pour les voyageurs qui recherchent calme, intimite et service haut de gamme.
+          <span data-detail-description>Un voyage exclusif dans un lagon turquoise, pense pour les voyageurs qui recherchent calme, intimite et service haut de gamme.</span>
         </p>
-        <div class="hero-badges">
+        <div class="hero-badges" data-detail-badges>
           <span>Note 4.9/5</span>
           <span>7 jours</span>
           <span>Hotel 5 etoiles</span>
@@ -54,7 +54,7 @@
 
     <section class="detail-layout">
       <div class="detail-main">
-        <section class="gallery-grid" aria-label="Galerie Maldives">
+        <section class="gallery-grid" aria-label="Galerie destination" data-detail-gallery>
           <img class="gallery-large" src="https://images.unsplash.com/photo-1769389352398-f7b694034eb5?auto=format&fit=crop&w=1400&q=80" alt="Villas sur pilotis aux Maldives">
           <img src="https://images.unsplash.com/photo-1514282401047-d79a71a590e8?auto=format&fit=crop&w=900&q=80" alt="Plage et lagon turquoise aux Maldives">
           <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=900&q=80" alt="Suite premium avec vue tropicale">
@@ -62,9 +62,9 @@
 
         <section class="detail-section" aria-labelledby="overview-title">
           <p class="eyebrow">Apercu</p>
-          <h2 id="overview-title">Une parenthese privee au bord du lagon</h2>
+          <h2 id="overview-title" data-detail-overview-title>Une parenthese privee au bord du lagon</h2>
           <p>
-            Ce sejour associe vol international, transfert en bateau prive, villa sur pilotis, petits-dejeuners premium et experiences personnalisees. Le programme reste flexible afin de laisser de la place au repos, aux activites nautiques et aux diners organises sur la plage.
+            <span data-detail-overview>Ce sejour associe vol international, transfert en bateau prive, villa sur pilotis, petits-dejeuners premium et experiences personnalisees. Le programme reste flexible afin de laisser de la place au repos, aux activites nautiques et aux diners organises sur la plage.</span>
           </p>
         </section>
 
@@ -113,7 +113,7 @@
         <section class="detail-section" aria-labelledby="recommendations-title">
           <p class="eyebrow">A associer</p>
           <h2 id="recommendations-title">Options recommandees</h2>
-          <div class="option-grid">
+          <div class="option-grid" data-detail-options>
             <article class="option-card">
               <span>Hotel</span>
               <h3>Ocean Pearl Resort</h3>
@@ -135,14 +135,15 @@
 
       <aside class="booking-panel" aria-label="Composer le sejour">
         <p class="eyebrow">Composer le sejour</p>
-        <h2>Maldives premium</h2>
+        <h2 data-booking-title>Maldives premium</h2>
         <div class="price-box">
           <span>A partir de</span>
-          <strong>2 490 EUR</strong>
+          <strong data-booking-price>2 490 EUR</strong>
           <span>par personne</span>
         </div>
 
-        <form class="booking-form" action="panier.html" method="get">
+        <form class="booking-form" action="../backend/api/create-reservation.php" method="post" data-booking-form>
+          <input type="hidden" name="id_destination" value="1" data-booking-destination>
           <label>
             <span>Depart</span>
             <input type="date" name="depart">
@@ -161,6 +162,7 @@
             </select>
           </label>
           <button class="btn-primary" type="submit">Ajouter au panier</button>
+          <p class="form-message" data-booking-message aria-live="polite"></p>
         </form>
 
         <div class="booking-note">
