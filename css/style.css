@@ -1161,6 +1161,15 @@ img {
   box-shadow: var(--shadow);
 }
 
+.register-panel {
+  position: static;
+}
+
+.account-layout .dashboard-preview {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+}
+
 .login-panel h2 {
   margin: 0;
   font-size: 1.6rem;
@@ -1305,6 +1314,33 @@ img {
   margin-top: 24px;
 }
 
+.confirmation-card {
+  display: grid;
+  gap: 16px;
+  max-width: 760px;
+  padding: 28px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--white);
+  box-shadow: var(--shadow);
+}
+
+.confirmation-card h2 {
+  margin: 0;
+  font-size: clamp(2rem, 4vw, 3.4rem);
+}
+
+.confirmation-card p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 1.1rem;
+}
+
+.confirmation-card a {
+  justify-self: start;
+  text-decoration: none;
+}
+
 @media (max-width: 980px) {
   .menu-toggle {
     display: block;
@@ -1362,6 +1398,11 @@ img {
   .booking-panel,
   .login-panel {
     position: static;
+  }
+
+  .account-layout .dashboard-preview {
+    grid-column: auto;
+    grid-row: auto;
   }
 
   .included-grid,

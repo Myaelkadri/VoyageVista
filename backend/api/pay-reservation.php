@@ -83,6 +83,7 @@ try {
     sendJson([
         'success' => true,
         'message' => 'Paiement accepté. Réservation confirmée.',
+        'reservation_id' => $reservationId,
     ]);
 } catch (Throwable $error) {
     if (isset($pdo) && $pdo->inTransaction()) {

@@ -20,6 +20,14 @@ if ($nom === '' || $prenom === '' || $email === '' || $password === '') {
     sendError('Nom, prénom, email et mot de passe obligatoires.');
 }
 
+if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    sendError('Email invalide.');
+}
+
+if (strlen($password) < 6) {
+    sendError('Le mot de passe doit contenir au moins 6 caractères.');
+}
+
 if (!in_array($role, ['voyageur', 'prestataire', 'admin'], true)) {
     sendError('Rôle invalide.');
 }
@@ -34,7 +42,7 @@ try {
         'nom' => $nom,
         'prenom' => $prenom,
         'email' => $email,
-        'mot_de_passe' => $password,
+        'mot_de_passe' => password_hash($password, PASSWORD_DEFAULT),
         'telephone' => $telephone ?: null,
         'role' => $role,
     ]);

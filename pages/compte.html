@@ -78,7 +78,34 @@
         </label>
         <button class="btn-primary" type="submit">Se connecter</button>
         <p class="form-message" data-form-message aria-live="polite"></p>
-        <a href="#">Créer un compte</a>
+      </form>
+
+      <form class="login-panel register-panel" action="../backend/auth/register.php" method="post" data-register-form>
+        <p class="eyebrow">Inscription</p>
+        <h2>Créer un compte</h2>
+        <input type="hidden" name="role" value="voyageur" data-register-role-input>
+        <label>
+          <span>Prénom</span>
+          <input type="text" name="prenom" placeholder="Lucas" required>
+        </label>
+        <label>
+          <span>Nom</span>
+          <input type="text" name="nom" placeholder="Dupont" required>
+        </label>
+        <label>
+          <span>Email</span>
+          <input type="email" name="email" placeholder="vous@email.com" required>
+        </label>
+        <label>
+          <span>Téléphone</span>
+          <input type="tel" name="telephone" placeholder="0600000000">
+        </label>
+        <label>
+          <span>Mot de passe</span>
+          <input type="password" name="password" placeholder="6 caractères minimum" required>
+        </label>
+        <button class="btn-secondary" type="submit">Créer mon compte</button>
+        <p class="form-message" data-register-message aria-live="polite"></p>
       </form>
 
       <section class="dashboard-preview" aria-labelledby="dashboard-title">
@@ -118,6 +145,11 @@
         </div>
 
         <div class="management-grid">
+          <article>
+            <h3>Panier voyageur</h3>
+            <p>Consulter les séjours en attente, retirer une réservation ou passer au paiement.</p>
+            <a href="panier.html">Voir le panier</a>
+          </article>
           <article>
             <h3>Espace prestataire</h3>
             <p>Gestion des offres publiees, disponibilites, prix et reservations recues.</p>

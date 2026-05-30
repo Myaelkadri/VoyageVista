@@ -29,7 +29,10 @@ try {
     $statement->execute(['email' => $email]);
     $user = $statement->fetch();
 
-    if (!$user || $user['mot_de_passe'] !== $password) {
+    $passwordMatches = $user
+        && (password_verify($password, $user['mot_de_passe']) || hash_equals($user['mot_de_passe'], $password));
+
+    if (!$passwordMatches) {
         sendError('Identifiants incorrects.', 401);
     }
 

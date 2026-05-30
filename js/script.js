@@ -16,6 +16,9 @@ const formMessage = document.querySelector("[data-form-message]");
 const dashboardUser = document.querySelector("[data-dashboard-user]");
 const logoutButton = document.querySelector("[data-logout-button]");
 const dashboardGrid = document.querySelector(".dashboard-grid");
+const registerForm = document.querySelector("[data-register-form]");
+const registerRoleInput = document.querySelector("[data-register-role-input]");
+const registerMessage = document.querySelector("[data-register-message]");
 
 function setFormMessage(message, type = "info") {
   if (!formMessage) {
@@ -104,6 +107,10 @@ roleCards.forEach((card) => {
       roleInput.value = role;
     }
 
+    if (registerRoleInput) {
+      registerRoleInput.value = role;
+    }
+
     if (loginTitle) {
       loginTitle.textContent = `Connexion ${card.querySelector("span").textContent.toLowerCase()}`;
     }
@@ -149,6 +156,31 @@ if (logoutButton) {
     await fetch("../backend/auth/logout.php", { credentials: "include" });
     setFormMessage("Vous êtes déconnecté.", "success");
     updateLoggedUser(null);
+  });
+}
+
+if (registerForm) {
+  registerForm.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    setTypedMessage(registerMessage, "Création du compte...");
+
+    try {
+      const response = await fetch(registerForm.action, {
+        method: "POST",
+        body: new FormData(registerForm),
+        credentials: "include",
+      });
+      const data = await response.json();
+
+      if (!response.ok || !data.success) {
+        throw new Error(data.message || "Inscription impossible.");
+      }
+
+      setTypedMessage(registerMessage, `${data.message} Vous pouvez vous connecter.`, "success");
+      registerForm.reset();
+    } catch (error) {
+      setTypedMessage(registerMessage, error.message, "error");
+    }
   });
 }
 
@@ -646,6 +678,7 @@ if (paymentForm) {
         throw new Error(data.message || "Paiement impossible.");
       }
       setTypedMessage(paymentMessage, data.message, "success");
+      window.location.href = `confirmation.html?id=${encodeURIComponent(data.reservation_id)}`;
     } catch (error) {
       setTypedMessage(paymentMessage, error.message, "error");
     }
@@ -712,6 +745,7 @@ if (providerForm) {
 const adminCounts = document.querySelector("[data-admin-counts]");
 const adminUsers = document.querySelector("[data-admin-users]");
 const adminMessage = document.querySelector("[data-admin-message]");
+const confirmationCard = document.querySelector("[data-confirmation-card]");
 
 function renderAdmin(data) {
   if (!adminCounts || !adminUsers) {
@@ -782,4 +816,36 @@ if (adminCounts) {
       setTypedMessage(adminMessage, error.message, "error");
     }
   });
+}
+
+if (confirmationCard) {
+  const params = new URLSearchParams(window.location.search);
+  const reservationId = params.get("id");
+
+  fetch(`../backend/api/reservation.php?id=${encodeURIComponent(reservationId || "")}`, { credentials: "include" })
+    .then((response) => response.json())
+    .then((data) => {
+      if (!data.success) {
+        throw new Error(data.message || "Confirmation indisponible.");
+      }
+
+      const reservation = data.data;
+      confirmationCard.innerHTML = `
+        <span class="stay-tag">${escapeHTML(reservation.statut_reservation)}</span>
+        <h2>${escapeHTML(reservation.titre)}</h2>
+        <p>${escapeHTML(reservation.date_debut)} au ${escapeHTML(reservation.date_fin)}</p>
+        <div class="feature-details">
+          <span>Référence ${escapeHTML(reservation.reference_reservation)}</span>
+          <span>${formatPrice(reservation.montant_total)} EUR</span>
+        </div>
+        <a class="btn-primary" href="compte.html">Voir mon compte</a>
+      `;
+    })
+    .catch((error) => {
+      confirmationCard.innerHTML = `
+        <span class="stay-tag">Erreur</span>
+        <h2>${escapeHTML(error.message)}</h2>
+        <a class="btn-secondary" href="panier.html">Retour au panier</a>
+      `;
+    });
 }
