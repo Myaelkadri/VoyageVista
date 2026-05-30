@@ -98,3 +98,93 @@ if (logoutButton) {
     updateLoggedUser(null);
   });
 }
+
+const destinationsGrid = document.querySelector("[data-destinations-grid]");
+const featuredDestination = document.querySelector("[data-featured-destination]");
+const destinationsCount = document.querySelector("[data-destinations-count]");
+
+const destinationPhotos = {
+  "maldives.jpg": "https://images.unsplash.com/photo-1769389352398-f7b694034eb5?auto=format&fit=crop&w=1200&q=80",
+  "kyoto.jpg": "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=900&q=80",
+  "santorini.jpg": "https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?auto=format&fit=crop&w=900&q=80",
+  "marrakech.jpg": "https://images.unsplash.com/photo-1750859464437-b66433efd869?auto=format&fit=crop&w=900&q=80",
+};
+
+function formatPrice(value) {
+  return new Intl.NumberFormat("fr-FR", {
+    maximumFractionDigits: 0,
+  }).format(Number(value));
+}
+
+function getDestinationPhoto(destination) {
+  return destinationPhotos[destination.image] || "https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&w=900&q=80";
+}
+
+function renderFeaturedDestination(destination) {
+  if (!featuredDestination || !destination) {
+    return;
+  }
+
+  featuredDestination.innerHTML = `
+    <img class="featured-photo" src="${getDestinationPhoto(destination)}" alt="${destination.nom_destination}, ${destination.pays}">
+    <div class="featured-content">
+      <span class="stay-tag">Coup de coeur</span>
+      <h3>${destination.nom_destination}, ${destination.pays}</h3>
+      <p>${destination.description}</p>
+      <div class="feature-details">
+        <span>${destination.continent}</span>
+        <span>Voyage premium</span>
+        <span>A partir de ${formatPrice(destination.budget_min)} EUR</span>
+      </div>
+      <a class="btn-secondary" href="destination-detail.html?id=${destination.id_destination}">Voir la destination</a>
+    </div>
+  `;
+}
+
+function renderDestinationCards(destinations) {
+  if (!destinationsGrid) {
+    return;
+  }
+
+  destinationsGrid.innerHTML = destinations.map((destination) => `
+    <article class="catalog-card">
+      <img class="catalog-photo" src="${getDestinationPhoto(destination)}" alt="${destination.nom_destination}, ${destination.pays}">
+      <div class="catalog-card-body">
+        <div class="rating">Destination ${destination.continent}</div>
+        <h3>${destination.nom_destination}, ${destination.pays}</h3>
+        <p>${destination.description}</p>
+        <div class="card-meta">
+          <span>A partir de</span>
+          <span>${formatPrice(destination.budget_min)} EUR</span>
+        </div>
+        <a href="destination-detail.html?id=${destination.id_destination}">Voir la destination</a>
+      </div>
+    </article>
+  `).join("");
+}
+
+if (destinationsGrid) {
+  fetch("../backend/api/destinations.php")
+    .then((response) => response.json())
+    .then((data) => {
+      if (!data.success || !Array.isArray(data.data)) {
+        throw new Error("Destinations indisponibles");
+      }
+
+      const destinations = data.data;
+      const featured = destinations.find((destination) => destination.nom_destination === "Maldives") || destinations[0];
+      const cards = destinations.filter((destination) => destination.id_destination !== featured.id_destination);
+
+      if (destinationsCount) {
+        destinationsCount.textContent = `${destinations.length} destinations trouvées`;
+      }
+
+      renderFeaturedDestination(featured);
+      renderDestinationCards(cards);
+    })
+    .catch(() => {
+      if (destinationsCount) {
+        destinationsCount.textContent = "Destinations indisponibles";
+      }
+    });
+}
