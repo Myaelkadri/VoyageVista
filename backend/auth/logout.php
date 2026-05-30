@@ -11,5 +11,5 @@ session_destroy();
 
 sendJson([
     'success' => true,
-    'message' => 'Deconnexion reussie.',
+    'message' => 'Déconnexion réussie.',
 ]);

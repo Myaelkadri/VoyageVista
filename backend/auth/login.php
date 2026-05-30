@@ -7,7 +7,7 @@ require_once __DIR__ . '/../helpers/response.php';
 require_once __DIR__ . '/../helpers/session.php';
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    sendError('Methode non autorisee.', 405);
+    sendError('Méthode non autorisée.', 405);
 }
 
 $email = trim((string) ($_POST['email'] ?? ''));
@@ -34,11 +34,11 @@ try {
     }
 
     if ($role !== '' && $user['role'] !== $role) {
-        sendError('Ce compte ne correspond pas au role selectionne.', 403);
+        sendError('Ce compte ne correspond pas au rôle sélectionné.', 403);
     }
 
     if ($user['statut_compte'] !== 'actif') {
-        sendError('Ce compte n est pas actif.', 403);
+        sendError("Ce compte n'est pas actif.", 403);
     }
 
     startUserSession();
@@ -52,7 +52,7 @@ try {
 
     sendJson([
         'success' => true,
-        'message' => 'Connexion reussie.',
+        'message' => 'Connexion réussie.',
         'user' => $_SESSION['user'],
     ]);
 } catch (Throwable $error) {

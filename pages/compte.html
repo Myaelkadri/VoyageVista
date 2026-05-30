@@ -46,17 +46,17 @@
     </section>
 
     <section class="role-section" aria-label="Choix du role utilisateur">
-      <article class="role-card selected">
+      <article class="role-card selected" data-role="voyageur">
         <span>Voyageur</span>
         <h2>Composer et reserver</h2>
         <p>Favoris, itineraires, panier, reservations et notifications.</p>
       </article>
-      <article class="role-card">
+      <article class="role-card" data-role="prestataire">
         <span>Prestataire</span>
         <h2>Publier des offres</h2>
         <p>Destinations, hebergements, activites, transports et disponibilites.</p>
       </article>
-      <article class="role-card">
+      <article class="role-card" data-role="admin">
         <span>Administrateur</span>
         <h2>Superviser la plateforme</h2>
         <p>Moderation des offres, gestion utilisateurs et reservations.</p>
@@ -64,19 +64,21 @@
     </section>
 
     <section class="account-layout" aria-label="Connexion et apercu compte">
-      <form class="login-panel" action="compte.html" method="get">
-        <p class="eyebrow">Connexion voyageur</p>
-        <h2>Acceder a mon compte</h2>
+      <form class="login-panel" action="../backend/auth/login.php" method="post" data-login-form>
+        <p class="eyebrow" data-login-title>Connexion voyageur</p>
+        <h2>Accéder à mon compte</h2>
+        <input type="hidden" name="role" value="voyageur" data-role-input>
         <label>
           <span>Email</span>
-          <input type="email" name="email" placeholder="votre@email.com">
+          <input type="email" name="email" placeholder="votre@email.com" required>
         </label>
         <label>
           <span>Mot de passe</span>
-          <input type="password" name="password" placeholder="********">
+          <input type="password" name="password" placeholder="********" required>
         </label>
         <button class="btn-primary" type="submit">Se connecter</button>
-        <a href="#">Creer un compte</a>
+        <p class="form-message" data-form-message aria-live="polite"></p>
+        <a href="#">Créer un compte</a>
       </form>
 
       <section class="dashboard-preview" aria-labelledby="dashboard-title">
@@ -84,7 +86,9 @@
           <div>
             <p class="eyebrow">Apercu espace voyageur</p>
             <h2 id="dashboard-title">Tableau de bord</h2>
+            <p class="dashboard-user" data-dashboard-user>Connectez-vous pour afficher votre espace.</p>
           </div>
+          <button class="btn-secondary is-hidden" type="button" data-logout-button>Se déconnecter</button>
         </div>
 
         <div class="dashboard-grid">
