@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panier - VoyageVista</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <nav class="navbar" aria-label="Navigation principale">
+      <a class="brand" href="../index.html" aria-label="Accueil VoyageVista">
+        <span class="brand-mark">V</span>
+        <span>VoyageVista</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="../index.html">Accueil</a></li>
+        <li><a href="destinations.html">Destinations</a></li>
+        <li><a href="transports.html">Transports</a></li>
+        <li><a href="hebergements.html">Hebergements</a></li>
+        <li><a href="activites.html">Activites</a></li>
+        <li><a href="compte.html">Mon compte</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="page-hero compact-hero" aria-labelledby="page-title">
+      <div>
+        <p class="eyebrow">Panier voyageur</p>
+        <h1 id="page-title">Finalisez votre séjour.</h1>
+        <p>Retrouvez vos réservations en attente, puis passez au paiement simulé.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="results-toolbar">
+        <div>
+          <p class="eyebrow" data-cart-count>Chargement du panier...</p>
+          <h2>Votre panier</h2>
+        </div>
+      </div>
+      <div class="cart-list" data-cart-list></div>
+      <p class="form-message" data-cart-message aria-live="polite"></p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>VoyageVista - Plateforme de voyages premium</p>
+  </footer>
+
+  <script src="../js/script.js"></script>
+</body>
+</html>
