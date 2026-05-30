@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Paiement - VoyageVista</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <nav class="navbar" aria-label="Navigation principale">
+      <a class="brand" href="../index.html" aria-label="Accueil VoyageVista">
+        <span class="brand-mark">V</span>
+        <span>VoyageVista</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="panier.html">Panier</a></li>
+        <li><a href="compte.html">Mon compte</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="account-layout payment-layout" aria-label="Paiement">
+      <form class="login-panel" action="../backend/api/pay-reservation.php" method="post" data-payment-form>
+        <p class="eyebrow">Paiement sécurisé simulé</p>
+        <h1>Valider la réservation</h1>
+        <input type="hidden" name="id_reservation" data-payment-reservation>
+        <label>
+          <span>Nom sur la carte</span>
+          <input type="text" name="card_name" placeholder="Lucas Dupont" required>
+        </label>
+        <label>
+          <span>Numéro de carte</span>
+          <input type="text" name="card_number" placeholder="4242 4242 4242 4242" required>
+        </label>
+        <label>
+          <span>Expiration</span>
+          <input type="text" name="expiry" placeholder="12/29" required>
+        </label>
+        <label>
+          <span>CVC</span>
+          <input type="text" name="cvc" placeholder="123" required>
+        </label>
+        <button class="btn-primary" type="submit">Payer</button>
+        <p class="form-message" data-payment-message aria-live="polite"></p>
+      </form>
+
+      <section class="dashboard-preview">
+        <p class="eyebrow">Récapitulatif</p>
+        <h2 data-payment-summary>Réservation sélectionnée</h2>
+        <p>Le paiement est simulé pour le projet : aucune donnée bancaire réelle n'est transmise.</p>
+      </section>
+    </section>
+  </main>
+
+  <script src="../js/script.js"></script>
+</body>
+</html>
