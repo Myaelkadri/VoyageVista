@@ -10,6 +10,7 @@ try {
     $statement = $pdo->query(
         'SELECT t.id_transport, t.type_transport, t.compagnie, t.ville_depart, t.ville_arrivee,
                 t.date_depart, t.date_arrivee, t.prix, t.classe, t.places_disponibles,
+                t.id_destination,
                 d.nom_destination, d.pays
          FROM transport t
          INNER JOIN destination d ON d.id_destination = t.id_destination

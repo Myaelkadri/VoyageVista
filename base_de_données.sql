@@ -169,28 +169,42 @@ VALUES
 ('Maldives', 'Maldives', 'Asie', 'Séjour premium dans un lagon turquoise avec villas sur pilotis.', 'maldives.jpg', 2490, 10000),
 ('Kyoto', 'Japon', 'Asie', 'Expérience culturelle haut de gamme avec ryokan et visites privées.', 'kyoto.jpg', 3200, 9000),
 ('Santorini', 'Grèce', 'Europe', 'Séjour romantique avec suite vue mer et croisière privée.', 'santorini.jpg', 2850, 8500),
-('Marrakech', 'Maroc', 'Afrique', 'Riad de luxe, hammam privé et gastronomie marocaine.', 'marrakech.jpg', 1950, 7000);
+('Marrakech', 'Maroc', 'Afrique', 'Riad de luxe, hammam privé et gastronomie marocaine.', 'marrakech.jpg', 1950, 7000),
+('Dubai', 'Emirats arabes unis', 'Asie', 'Sejour spectaculaire entre hotel iconique, desert prive et rooftops exclusifs.', 'dubai.jpg', 3100, 12000),
+('Bahamas', 'Bahamas', 'Ameriques', 'Iles privees, plages claires, yacht et experience balneaire haut de gamme.', 'bahamas.jpg', 4200, 14000),
+('Capri', 'Italie', 'Europe', 'Adresse mediterraneenne chic avec bateau prive, grottes bleues et hotel de charme.', 'capri.jpg', 2600, 9000),
+('St Tropez', 'France', 'Europe', 'Sejour Riviera entre plage privee, marina, gastronomie et villa confidentielle.', 'st-tropez.jpg', 2900, 11000),
+('Monaco', 'Monaco', 'Europe', 'Week-end prestige avec hotel iconique, casino, port Hercule et table etoilee.', 'monaco.jpg', 3400, 13000);
 
 INSERT INTO hebergement 
 (nom_hebergement, type_hebergement, description, adresse, prix_nuit, capacite, nombre_etoiles, equipements, disponibilite, id_destination, id_prestataire)
 VALUES
 ('Ocean Pearl Resort', 'Villa sur pilotis', 'Villa premium avec piscine privée et accès direct au lagon.', 'Maldives', 890, 2, 5, 'Piscine, spa, vue mer, conciergerie', TRUE, 1, 2),
 ('Kyoto Garden Ryokan', 'Ryokan premium', 'Ryokan avec jardin privé, onsen et dîner kaiseki.', 'Kyoto', 540, 2, 5, 'Onsen, jardin privé, dîner inclus', TRUE, 2, 2),
-('Riad Almas', 'Riad luxe', 'Riad 5 étoiles avec patio, hammam privé et table gastronomique.', 'Marrakech', 420, 2, 5, 'Hammam, piscine, restaurant', TRUE, 4, 2);
+('Riad Almas', 'Riad luxe', 'Riad 5 étoiles avec patio, hammam privé et table gastronomique.', 'Marrakech', 420, 2, 5, 'Hammam, piscine, restaurant', TRUE, 4, 2),
+('Aman Kyoto', 'Hotel 5 etoiles', 'Retraite elegante dans un jardin prive au nord de Kyoto.', 'Kyoto', 780, 2, 5, 'Spa, jardin, restaurant, conciergerie', TRUE, 2, 2),
+('The Mitsui Kyoto', 'Hotel luxe', 'Hotel premium proche du chateau de Nijo avec spa thermal.', 'Kyoto', 690, 2, 5, 'Spa, onsen, table gastronomique', TRUE, 2, 2),
+('Suiran Kyoto', 'Ryokan luxe', 'Adresse au bord de la riviere a Arashiyama avec suites raffinees.', 'Kyoto', 620, 2, 5, 'Vue riviere, onsen, restaurant', TRUE, 2, 2);
 
 INSERT INTO transport
 (type_transport, compagnie, ville_depart, ville_arrivee, date_depart, date_arrivee, prix, classe, places_disponibles, id_destination, id_prestataire)
 VALUES
 ('avion', 'Qatar Airways', 'Paris CDG', 'Male MLE', '2026-06-15 10:00:00', '2026-06-16 00:20:00', 1840, 'Business', 12, 1, 2),
 ('avion', 'Emirates', 'Paris CDG', 'Dubai DXB', '2026-06-15 14:00:00', '2026-06-15 20:45:00', 2950, 'Première', 8, 1, 2),
-('train', 'Venice Express', 'Paris Gare de Lyon', 'Venise', '2026-07-01 19:30:00', '2026-07-02 08:40:00', 620, 'Cabine privée', 20, 3, 2);
+('train', 'Venice Express', 'Paris Gare de Lyon', 'Venise', '2026-07-01 19:30:00', '2026-07-02 08:40:00', 620, 'Cabine privée', 20, 3, 2),
+('avion', 'Air France', 'Paris CDG', 'Tokyo HND', '2026-09-10 13:20:00', '2026-09-11 09:35:00', 1720, 'Business', 10, 2, 2),
+('avion', 'Japan Airlines', 'Paris CDG', 'Osaka KIX', '2026-09-10 11:00:00', '2026-09-11 07:50:00', 1580, 'Premium Economy', 14, 2, 2),
+('train', 'Shinkansen Green', 'Tokyo Station', 'Kyoto Station', '2026-09-12 10:00:00', '2026-09-12 12:15:00', 210, 'Green Car', 24, 2, 2);
 
 INSERT INTO activite
 (nom_activite, categorie, description, prix, duree, capacite_max, places_disponibles, date_activite, id_destination, id_prestataire)
 VALUES
 ('Dîner sous les étoiles', 'Gastronomie', 'Table privée sur la plage avec menu dégustation.', 220, '2h', 2, 2, '2026-06-17 20:00:00', 1, 2),
 ('Snorkeling privé', 'Aventure', 'Sortie snorkeling avec guide local et bateau réservé.', 480, '4h', 6, 4, '2026-06-18 09:00:00', 1, 2),
-('Rituel spa duo', 'Bien-être', 'Massage, hammam privé et soin signature.', 310, '3h', 2, 2, '2026-06-19 15:00:00', 1, 2);
+('Rituel spa duo', 'Bien-être', 'Massage, hammam privé et soin signature.', 310, '3h', 2, 2, '2026-06-19 15:00:00', 1, 2),
+('Ceremonie du the privee', 'Culture', 'Experience traditionnelle avec maitre de the dans une maison de Kyoto.', 180, '2h', 4, 4, '2026-09-13 15:00:00', 2, 2),
+('Visite temples Kyoto', 'Culture', 'Guide prive francophone, temples historiques et jardins zen.', 260, '4h', 6, 6, '2026-09-14 09:00:00', 2, 2),
+('Diner kaiseki', 'Gastronomie', 'Menu degustation japonais dans une adresse confidentielle.', 340, '3h', 2, 2, '2026-09-14 20:00:00', 2, 2);
 
 INSERT INTO itineraire (titre, date_debut, date_fin, statut, prix_total, id_voyageur)
 VALUES

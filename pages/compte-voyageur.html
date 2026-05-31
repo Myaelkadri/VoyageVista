@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Espace voyageur - VoyageVista</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <nav class="navbar" aria-label="Navigation principale">
+      <a class="brand" href="../index.html" aria-label="Accueil VoyageVista">
+        <span class="brand-mark">V</span>
+        <span>VoyageVista</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="destinations.html">Destinations</a></li>
+        <li><a href="panier.html">Panier</a></li>
+        <li><a href="compte.html">Changer d'espace</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="account-layout traveler-dashboard" aria-label="Espace voyageur">
+      <section class="dashboard-preview" aria-labelledby="dashboard-title">
+        <div class="results-toolbar">
+          <div>
+            <p class="eyebrow">Espace voyageur</p>
+            <h1 id="dashboard-title">Tableau de bord</h1>
+            <p class="dashboard-user" data-dashboard-user>Connectez-vous pour afficher votre espace.</p>
+          </div>
+          <button class="btn-secondary is-hidden" type="button" data-logout-button>Se déconnecter</button>
+        </div>
+
+        <div class="dashboard-grid">
+          <article class="dashboard-card">
+            <span>Réservation active</span>
+            <h3>Chargement...</h3>
+            <p>Vos informations arrivent.</p>
+          </article>
+        </div>
+
+        <div class="management-grid">
+          <article>
+            <h3>Panier voyageur</h3>
+            <p>Consulter les séjours en attente, retirer une réservation ou passer au paiement.</p>
+            <a href="panier.html">Voir le panier</a>
+          </article>
+          <article>
+            <h3>Catalogue</h3>
+            <p>Reprendre la recherche et ajouter une nouvelle destination au panier.</p>
+            <a href="destinations.html">Voir les destinations</a>
+          </article>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <script src="../js/script.js"></script>
+</body>
+</html>

@@ -37,7 +37,7 @@ try {
     }
 
     $titre = 'Séjour ' . $destinationData['nom_destination'];
-    $montant = (float) $destinationData['budget_min'];
+    $montant = 0;
 
     $itineraire = $pdo->prepare(
         'INSERT INTO itineraire (titre, date_debut, date_fin, statut, prix_total, id_voyageur)
@@ -66,6 +66,7 @@ try {
         'id_voyageur' => $user['id'],
         'id_itineraire' => $itineraireId,
     ]);
+    $reservationId = (int) $pdo->lastInsertId();
 
     $pdo->commit();
 
@@ -73,6 +74,9 @@ try {
         'success' => true,
         'message' => 'Voyage ajouté au panier.',
         'reference' => $reference,
+        'reservation_id' => $reservationId,
+        'itineraire_id' => $itineraireId,
+        'destination_id' => $destinationId,
     ], 201);
 } catch (Throwable $error) {
     if (isset($pdo) && $pdo->inTransaction()) {

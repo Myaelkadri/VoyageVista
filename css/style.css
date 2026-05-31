@@ -1165,9 +1165,38 @@ img {
   position: static;
 }
 
-.account-layout .dashboard-preview {
+.account-layout:not(.traveler-dashboard) .dashboard-preview {
   grid-column: 2;
   grid-row: 1 / span 2;
+}
+
+.auth-layout {
+  width: min(900px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: 50px 0 78px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 28px;
+  align-items: start;
+}
+
+.role-entry-section {
+  padding-bottom: 78px;
+}
+
+.account-session-card {
+  grid-column: 1 / -1;
+}
+
+.account-session-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.traveler-dashboard {
+  display: block;
 }
 
 .login-panel h2 {
@@ -1386,7 +1415,8 @@ img {
   .transport-layout,
   .transport-card,
   .large-experience,
-  .account-layout {
+  .account-layout,
+  .auth-layout {
     grid-template-columns: 1fr;
   }
 

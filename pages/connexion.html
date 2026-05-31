@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Connexion - VoyageVista</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <nav class="navbar" aria-label="Navigation principale">
+      <a class="brand" href="../index.html" aria-label="Accueil VoyageVista">
+        <span class="brand-mark">V</span>
+        <span>VoyageVista</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="compte.html">Changer de rôle</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="account-hero" aria-labelledby="page-title">
+      <div>
+        <p class="eyebrow">Connexion securisee</p>
+        <h1 id="page-title" data-auth-heading>Connexion VoyageVista</h1>
+        <p data-auth-copy>Connectez-vous avec le role selectionne.</p>
+      </div>
+    </section>
+
+    <section class="auth-layout" aria-label="Connexion et inscription">
+      <form class="login-panel" action="../backend/auth/login.php" method="post" data-login-form>
+        <p class="eyebrow" data-login-title>Connexion</p>
+        <h2>Acceder a mon espace</h2>
+        <input type="hidden" name="role" value="voyageur" data-role-input>
+        <label>
+          <span>Email</span>
+          <input type="email" name="email" placeholder="votre@email.com" required>
+        </label>
+        <label>
+          <span>Mot de passe</span>
+          <input type="password" name="password" placeholder="********" required>
+        </label>
+        <button class="btn-primary" type="submit">Se connecter</button>
+        <p class="form-message" data-form-message aria-live="polite"></p>
+      </form>
+
+      <form class="login-panel register-panel" action="../backend/auth/register.php" method="post" data-register-form>
+        <p class="eyebrow">Inscription</p>
+        <h2>Créer un compte</h2>
+        <input type="hidden" name="role" value="voyageur" data-register-role-input>
+        <label>
+          <span>Prénom</span>
+          <input type="text" name="prenom" placeholder="Lucas" required>
+        </label>
+        <label>
+          <span>Nom</span>
+          <input type="text" name="nom" placeholder="Dupont" required>
+        </label>
+        <label>
+          <span>Email</span>
+          <input type="email" name="email" placeholder="vous@email.com" required>
+        </label>
+        <label>
+          <span>Téléphone</span>
+          <input type="tel" name="telephone" placeholder="0600000000">
+        </label>
+        <label>
+          <span>Mot de passe</span>
+          <input type="password" name="password" placeholder="6 caractères minimum" required>
+        </label>
+        <button class="btn-secondary" type="submit">Créer mon compte</button>
+        <p class="form-message" data-register-message aria-live="polite"></p>
+      </form>
+    </section>
+  </main>
+
+  <script src="../js/script.js"></script>
+</body>
+</html>

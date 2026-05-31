@@ -44,10 +44,10 @@
         </p>
       </div>
 
-      <form class="mini-search" action="destinations.html" method="get">
+      <form class="mini-search" action="destinations.html" method="get" data-destination-search>
         <label>
           <span>Recherche rapide</span>
-          <input type="search" name="destination" placeholder="Pays, ville, ambiance...">
+          <input type="search" name="destination" placeholder="Pays, ville, ambiance..." data-destination-search-input>
         </label>
         <button class="btn-primary" type="submit">Filtrer</button>
       </form>
@@ -57,29 +57,30 @@
       <aside class="filters-panel" aria-label="Filtres">
         <div class="filters-title">
           <h2>Filtres</h2>
-          <button type="button">Reinitialiser</button>
+          <button type="button" data-reset-destination-filters>Reinitialiser</button>
         </div>
 
         <div class="filter-group">
           <h3>Continent</h3>
-          <label><input type="checkbox" checked> Europe</label>
-          <label><input type="checkbox" checked> Asie</label>
-          <label><input type="checkbox"> Afrique</label>
-          <label><input type="checkbox"> Ameriques</label>
+          <label><input type="checkbox" name="continent" value="Europe" checked data-destination-filter> Europe</label>
+          <label><input type="checkbox" name="continent" value="Asie" checked data-destination-filter> Asie</label>
+          <label><input type="checkbox" name="continent" value="Afrique" checked data-destination-filter> Afrique</label>
+          <label><input type="checkbox" name="continent" value="Ameriques" checked data-destination-filter> Ameriques</label>
         </div>
 
         <div class="filter-group">
           <h3>Type</h3>
-          <label><input type="checkbox" checked> Plage</label>
-          <label><input type="checkbox"> Montagne</label>
-          <label><input type="checkbox"> Ville</label>
+          <label><input type="checkbox" name="type" value="Plage" checked data-destination-filter> Plage</label>
+          <label><input type="checkbox" name="type" value="Montagne" checked data-destination-filter> Montagne</label>
+          <label><input type="checkbox" name="type" value="Ville" checked data-destination-filter> Ville</label>
         </div>
 
         <div class="filter-group">
           <h3>Budget par personne</h3>
-          <label><input type="radio" name="budget"> Moins de 1 500 EUR</label>
-          <label><input type="radio" name="budget" checked> 1 500 - 5 000 EUR</label>
-          <label><input type="radio" name="budget"> Plus de 5 000 EUR</label>
+          <label><input type="radio" name="budget" value="all" checked data-destination-filter> Tous les budgets</label>
+          <label><input type="radio" name="budget" value="under-2500" data-destination-filter> Moins de 2 500 EUR</label>
+          <label><input type="radio" name="budget" value="2500-4000" data-destination-filter> 2 500 - 4 000 EUR</label>
+          <label><input type="radio" name="budget" value="over-4000" data-destination-filter> Plus de 4 000 EUR</label>
         </div>
 
         <div class="filter-group">
@@ -99,11 +100,11 @@
 
           <label class="sort-select">
             <span>Trier par</span>
-            <select>
+            <select data-destination-sort>
               <option>Recommandes</option>
               <option>Prix croissant</option>
-              <option>Note moyenne</option>
-              <option>Duree</option>
+              <option>Prix decroissant</option>
+              <option>Nom A-Z</option>
             </select>
           </label>
         </div>
@@ -209,11 +210,8 @@
           </article>
         </div>
 
-        <div class="pagination" aria-label="Pagination">
+        <div class="pagination" aria-label="Pagination" data-destinations-pagination>
           <button type="button" class="active">1</button>
-          <button type="button">2</button>
-          <button type="button">3</button>
-          <button type="button">Suivant</button>
         </div>
       </section>
     </section>
