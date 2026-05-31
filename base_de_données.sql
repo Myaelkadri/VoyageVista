@@ -26,7 +26,7 @@ CREATE TABLE destination (
     budget_min DECIMAL(10,2),
     budget_max DECIMAL(10,2)
 );
-
+ 
 CREATE TABLE hebergement (
     id_hebergement INT AUTO_INCREMENT PRIMARY KEY,
     nom_hebergement VARCHAR(150) NOT NULL,
