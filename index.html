@@ -4,12 +4,18 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>VoyageVista - Voyages premium</title>
+
+  <!-- Polices Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Feuille de style principale -->
   <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
+  <!-- En-tête du site avec navigation principale -->
   <header class="site-header">
     <nav class="navbar" aria-label="Navigation principale">
       <a class="brand" href="index.html" aria-label="Accueil VoyageVista">
@@ -27,36 +33,44 @@
         <li><a href="index.html" class="active">Accueil</a></li>
         <li><a href="pages/destinations.html">Destinations</a></li>
         <li><a href="pages/transports.html">Transports</a></li>
-        <li><a href="pages/hebergements.html">Hebergements</a></li>
-        <li><a href="pages/activites.html">Activites</a></li>
+        <li><a href="pages/hebergements.html">Hébergements</a></li>
+        <li><a href="pages/activites.html">Activités</a></li>
         <li><a href="pages/compte.html">Mon compte</a></li>
       </ul>
     </nav>
   </header>
 
   <main>
+    <!-- Section principale de présentation -->
     <section class="hero" aria-labelledby="hero-title">
       <div class="hero-overlay"></div>
+
       <div class="hero-content">
-        <p class="eyebrow">Voyages premium sur-mesure</p>
-        <h1 id="hero-title">Voyagez autrement. En premiere classe.</h1>
+        <p class="eyebrow">Voyages premium sur mesure</p>
+        <h1 id="hero-title">Voyagez autrement. En première classe.</h1>
+
         <p class="hero-text">
-          Decouvrez des sejours exclusifs, des hotels d'exception et des experiences privees pensees pour les voyageurs exigeants.
+          Découvrez des séjours exclusifs, des hôtels d'exception et des expériences privées
+          pensées pour les voyageurs exigeants.
         </p>
 
+        <!-- Formulaire de recherche rapide -->
         <form class="search-panel" action="pages/destinations.html" method="get">
           <label>
             <span>Destination</span>
             <input type="search" name="destination" placeholder="Maldives, Kyoto, Bali..." autocomplete="off">
           </label>
+
           <label>
-            <span>Depart</span>
+            <span>Départ</span>
             <input type="date" name="depart">
           </label>
+
           <label>
             <span>Retour</span>
             <input type="date" name="retour">
           </label>
+
           <label>
             <span>Voyageurs</span>
             <select name="voyageurs">
@@ -66,52 +80,61 @@
               <option>4 voyageurs</option>
             </select>
           </label>
+
           <button class="btn-primary" type="submit">Rechercher</button>
         </form>
       </div>
     </section>
 
+    <!-- Aperçu des destinations principales -->
     <section class="section destinations-preview" aria-labelledby="destinations-title">
       <div class="section-heading">
         <div>
-          <p class="eyebrow">Selection exclusive</p>
+          <p class="eyebrow">Sélection exclusive</p>
           <h2 id="destinations-title">Destinations phares</h2>
         </div>
+
         <a class="text-link" href="pages/destinations.html">Voir toutes</a>
       </div>
 
       <div class="destination-grid">
         <article class="destination-card">
           <img src="https://images.unsplash.com/photo-1514282401047-d79a71a590e8?auto=format&fit=crop&w=900&q=80" alt="Plage turquoise aux Maldives">
+
           <div class="card-content">
             <h3>Maldives</h3>
-            <p>Villas privees, lagons cristallins et service majordome.</p>
+            <p>Villas privées, lagons cristallins et service majordome.</p>
+
             <div class="card-meta">
-              <span>A partir de 2 490 EUR</span>
+              <span>À partir de 2 490 EUR</span>
               <span>5.0</span>
             </div>
           </div>
         </article>
 
         <article class="destination-card">
-          <img src="https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=900&q=80" alt="Temple traditionnel a Kyoto">
+          <img src="https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=900&q=80" alt="Temple traditionnel à Kyoto">
+
           <div class="card-content">
             <h3>Kyoto, Japon</h3>
-            <p>Ryokans haut de gamme, jardins zen et gastronomie privee.</p>
-              <div class="card-meta">
-              <span>A partir de 3 200 EUR</span>
+            <p>Ryokans haut de gamme, jardins zen et gastronomie privée.</p>
+
+            <div class="card-meta">
+              <span>À partir de 3 200 EUR</span>
               <span>4.9</span>
             </div>
           </div>
         </article>
 
         <article class="destination-card">
-          <img src="https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?auto=format&fit=crop&w=900&q=80" alt="Maisons blanches a Santorini">
+          <img src="https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?auto=format&fit=crop&w=900&q=80" alt="Maisons blanches à Santorini">
+
           <div class="card-content">
             <h3>Santorini</h3>
-            <p>Suites vue mer, couchers de soleil et croisieres privees.</p>
+            <p>Suites vue mer, couchers de soleil et croisières privées.</p>
+
             <div class="card-meta">
-              <span>A partir de 2 850 EUR</span>
+              <span>À partir de 2 850 EUR</span>
               <span>4.8</span>
             </div>
           </div>
@@ -119,11 +142,13 @@
 
         <article class="destination-card">
           <img src="https://images.unsplash.com/photo-1736390739590-72fccb016af0?auto=format&fit=crop&w=900&q=80" alt="Glacier et montagnes en Patagonie">
+
           <div class="card-content">
             <h3>Patagonie</h3>
             <p>Lodges confidentiels, glaciers et guides experts.</p>
+
             <div class="card-meta">
-              <span>A partir de 4 100 EUR</span>
+              <span>À partir de 4 100 EUR</span>
               <span>4.9</span>
             </div>
           </div>
@@ -131,11 +156,12 @@
       </div>
     </section>
 
+    <!-- Suggestions de séjours -->
     <section class="section stays-section" aria-labelledby="stays-title">
       <div class="section-heading">
         <div>
           <p class="eyebrow">Inspiration</p>
-          <h2 id="stays-title">Sejours recommandes pour vous</h2>
+          <h2 id="stays-title">Séjours recommandés pour vous</h2>
         </div>
       </div>
 
@@ -143,33 +169,38 @@
         <article class="stay-item">
           <span class="stay-tag">Aventure & nature</span>
           <h3>Safari Kenya - 7 jours</h3>
-          <p>Vol business, lodge premium et game drive prive.</p>
-          <a href="pages/destinations.html">Voir le sejour</a>
+          <p>Vol business, lodge premium et game drive privé.</p>
+          <a href="pages/destinations.html">Voir le séjour</a>
         </article>
+
         <article class="stay-item">
-          <span class="stay-tag">Bien-etre & luxe</span>
+          <span class="stay-tag">Bien-être & luxe</span>
           <h3>Retraite Bali - 10 jours</h3>
-          <p>Villa privee, spa quotidien et experiences culinaires.</p>
-          <a href="pages/destinations.html">Voir le sejour</a>
+          <p>Villa privée, spa quotidien et expériences culinaires.</p>
+          <a href="pages/destinations.html">Voir le séjour</a>
         </article>
+
         <article class="stay-item">
           <span class="stay-tag">Culture & gastronomie</span>
-          <h3>Tokyo prive - 8 jours</h3>
-          <p>Hotels 5 etoiles, guide francophone et tables reservees.</p>
-          <a href="pages/destinations.html">Voir le sejour</a>
+          <h3>Tokyo privé - 8 jours</h3>
+          <p>Hôtels 5 étoiles, guide francophone et tables réservées.</p>
+          <a href="pages/destinations.html">Voir le séjour</a>
         </article>
       </div>
     </section>
   </main>
 
+  <!-- Pied de page -->
   <footer class="site-footer">
     <p>VoyageVista - Plateforme de voyages premium</p>
+
     <div>
       <a href="#">Contact</a>
-      <a href="#">Mentions legales</a>
+      <a href="#">Mentions légales</a>
     </div>
   </footer>
 
+  <!-- Script principal -->
   <script src="js/script.js"></script>
 </body>
 </html>
