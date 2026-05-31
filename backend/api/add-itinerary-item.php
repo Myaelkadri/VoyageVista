@@ -45,9 +45,15 @@ try {
     $price = 0.0;
 
     if ($type === 'transport') {
-        $item = $pdo->prepare('SELECT prix FROM transport WHERE id_transport = :id LIMIT 1');
+        $item = $pdo->prepare('SELECT prix, places_disponibles FROM transport WHERE id_transport = :id LIMIT 1');
         $item->execute(['id' => $itemId]);
-        $price = (float) $item->fetchColumn();
+        $transport = $item->fetch();
+
+        if (!$transport || (int) $transport['places_disponibles'] <= 0) {
+            sendError('Transport indisponible.', 409);
+        }
+
+        $price = (float) $transport['prix'];
 
         $insert = $pdo->prepare(
             'INSERT IGNORE INTO itineraire_transport (id_itineraire, id_transport)
@@ -57,12 +63,28 @@ try {
             'itineraire' => $reservation['id_itineraire'],
             'transport' => $itemId,
         ]);
+
+        if ($insert->rowCount() > 0) {
+            $stock = $pdo->prepare(
+                'UPDATE transport
+                 SET places_disponibles = places_disponibles - 1
+                 WHERE id_transport = :id
+                   AND places_disponibles > 0'
+            );
+            $stock->execute(['id' => $itemId]);
+        }
     }
 
     if ($type === 'hebergement') {
-        $item = $pdo->prepare('SELECT prix_nuit FROM hebergement WHERE id_hebergement = :id LIMIT 1');
+        $item = $pdo->prepare('SELECT prix_nuit, disponibilite FROM hebergement WHERE id_hebergement = :id LIMIT 1');
         $item->execute(['id' => $itemId]);
-        $price = (float) $item->fetchColumn();
+        $hebergement = $item->fetch();
+
+        if (!$hebergement || (int) $hebergement['disponibilite'] !== 1) {
+            sendError('Hebergement indisponible.', 409);
+        }
+
+        $price = (float) $hebergement['prix_nuit'];
 
         $insert = $pdo->prepare(
             'INSERT IGNORE INTO itineraire_hebergement (id_itineraire, id_hebergement, date_debut, date_fin)
@@ -74,12 +96,23 @@ try {
             'date_debut' => $reservation['date_debut'],
             'date_fin' => $reservation['date_fin'],
         ]);
+
+        if ($insert->rowCount() > 0) {
+            $stock = $pdo->prepare('UPDATE hebergement SET disponibilite = 0 WHERE id_hebergement = :id');
+            $stock->execute(['id' => $itemId]);
+        }
     }
 
     if ($type === 'activite') {
-        $item = $pdo->prepare('SELECT prix FROM activite WHERE id_activite = :id LIMIT 1');
+        $item = $pdo->prepare('SELECT prix, places_disponibles FROM activite WHERE id_activite = :id LIMIT 1');
         $item->execute(['id' => $itemId]);
-        $price = (float) $item->fetchColumn();
+        $activite = $item->fetch();
+
+        if (!$activite || (int) $activite['places_disponibles'] <= 0) {
+            sendError('Activite complete.', 409);
+        }
+
+        $price = (float) $activite['prix'];
 
         $insert = $pdo->prepare(
             'INSERT IGNORE INTO itineraire_activite (id_itineraire, id_activite, nombre_participants)
@@ -90,6 +123,16 @@ try {
             'activite' => $itemId,
             'participants' => 1,
         ]);
+
+        if ($insert->rowCount() > 0) {
+            $stock = $pdo->prepare(
+                'UPDATE activite
+                 SET places_disponibles = places_disponibles - 1
+                 WHERE id_activite = :id
+                   AND places_disponibles > 0'
+            );
+            $stock->execute(['id' => $itemId]);
+        }
     }
 
     if ($price <= 0) {

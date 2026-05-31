@@ -22,7 +22,7 @@ try {
     $reservations->execute(['id' => $user['id']]);
 
     $notifications = $pdo->prepare(
-        'SELECT titre, message, type_notification, statut_lecture, date_envoi
+        'SELECT id_notification, titre, message, type_notification, statut_lecture, date_envoi
          FROM notification
          WHERE id_utilisateur = :id
          ORDER BY date_envoi DESC'

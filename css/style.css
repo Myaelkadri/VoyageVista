@@ -1213,7 +1213,8 @@ img {
   text-transform: uppercase;
 }
 
-.login-panel input {
+.login-panel input,
+.login-panel select {
   min-height: 46px;
   border: 1px solid var(--line);
   border-radius: 8px;

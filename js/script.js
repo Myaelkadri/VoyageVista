@@ -26,6 +26,12 @@ const currentSessionCard = document.querySelector("[data-current-session]");
 const currentSessionTitle = document.querySelector("[data-current-session-title]");
 const currentSessionText = document.querySelector("[data-current-session-text]");
 const currentSessionLink = document.querySelector("[data-current-session-link]");
+const profileForm = document.querySelector("[data-profile-form]");
+const profileMessage = document.querySelector("[data-profile-message]");
+const profilePrenom = document.querySelector("[data-profile-prenom]");
+const profileNom = document.querySelector("[data-profile-nom]");
+const profileTelephone = document.querySelector("[data-profile-telephone]");
+const notificationsList = document.querySelector("[data-notifications-list]");
 
 const roleLabels = {
   voyageur: "voyageur",
@@ -91,6 +97,15 @@ function updateLoggedUser(user) {
   }
 
   dashboardUser.textContent = `${user.prenom} ${user.nom} - ${user.role}`;
+  if (profilePrenom) {
+    profilePrenom.value = user.prenom || "";
+  }
+  if (profileNom) {
+    profileNom.value = user.nom || "";
+  }
+  if (profileTelephone) {
+    profileTelephone.value = user.telephone || "";
+  }
   logoutButton.classList.remove("is-hidden");
   loadDashboardData();
 }
@@ -122,7 +137,9 @@ function renderDashboard(data) {
 
   const reservation = data.reservations[0];
   const notificationsCount = data.notifications.length;
+  const unreadNotifications = data.notifications.filter((notification) => notification.statut_lecture !== "lue").length;
   const favorisCount = data.favoris.length;
+  const latestNotification = data.notifications[0];
 
   dashboardGrid.innerHTML = `
     <article class="dashboard-card">
@@ -146,9 +163,31 @@ function renderDashboard(data) {
     <article class="dashboard-card">
       <span>Notifications</span>
       <h3>${notificationsCount} messages</h3>
-      <p>${escapeHTML(data.notifications[0]?.message || "Aucune notification pour le moment.")}</p>
+      <p>${escapeHTML(latestNotification?.message || "Aucune notification pour le moment.")}</p>
+      ${unreadNotifications > 0 ? `
+        <button class="btn-secondary" type="button" data-mark-notifications-read>
+          Marquer comme lu (${unreadNotifications})
+        </button>
+      ` : ""}
     </article>
   `;
+
+  if (notificationsList) {
+    notificationsList.innerHTML = data.notifications.length
+      ? data.notifications.map((notification) => `
+        <article>
+          <h3>${escapeHTML(notification.titre)}</h3>
+          <p>${escapeHTML(notification.message)}</p>
+          <span class="stay-tag">${notification.statut_lecture === "lue" ? "Lue" : "Non lue"}</span>
+        </article>
+      `).join("")
+      : `
+        <article>
+          <h3>Notifications</h3>
+          <p>Aucune notification pour le moment. Une notification apparait apres paiement ou modification importante.</p>
+        </article>
+      `;
+  }
 }
 
 function loadDashboardData() {
@@ -164,6 +203,53 @@ function loadDashboardData() {
       }
     })
     .catch(() => {});
+}
+
+if (profileForm) {
+  profileForm.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    setTypedMessage(profileMessage, "Sauvegarde...");
+
+    try {
+      const response = await fetch(profileForm.action, {
+        method: "POST",
+        body: new FormData(profileForm),
+        credentials: "include",
+      });
+      const data = await response.json();
+      if (!response.ok || !data.success) {
+        throw new Error(data.message || "Modification impossible.");
+      }
+      setTypedMessage(profileMessage, data.message, "success");
+      updateLoggedUser(data.user);
+    } catch (error) {
+      setTypedMessage(profileMessage, error.message, "error");
+    }
+  });
+}
+
+if (dashboardGrid) {
+  dashboardGrid.addEventListener("click", async (event) => {
+    const button = event.target.closest("[data-mark-notifications-read]");
+    if (!button) {
+      return;
+    }
+
+    try {
+      const response = await fetch("../backend/api/mark-notification-read.php", {
+        method: "POST",
+        body: new FormData(),
+        credentials: "include",
+      });
+      const data = await response.json();
+      if (!response.ok || !data.success) {
+        throw new Error(data.message || "Action impossible.");
+      }
+      loadDashboardData();
+    } catch (error) {
+      setTypedMessage(profileMessage || formMessage, error.message, "error");
+    }
+  });
 }
 
 roleCards.forEach((card) => {
@@ -196,12 +282,14 @@ if (currentSessionCard) {
     .catch(() => {});
 }
 
-if (loginForm) {
+if (dashboardUser) {
   fetch("../backend/auth/me.php", { credentials: "include" })
     .then((response) => response.json())
     .then((data) => updateLoggedUser(data.user))
     .catch(() => updateLoggedUser(null));
+}
 
+if (loginForm) {
   loginForm.addEventListener("submit", async (event) => {
     event.preventDefault();
     setFormMessage("Connexion en cours...");
@@ -1227,7 +1315,10 @@ async function loadProviderOffers() {
       <article class="dashboard-card">
         <span>${escapeHTML(offer.type)}</span>
         <h3>${escapeHTML(offer.titre)}</h3>
-        <p>${escapeHTML(offer.nom_destination)} · ${formatPrice(offer.prix)} EUR</p>
+        <p>${escapeHTML(offer.nom_destination)} - ${formatPrice(offer.prix)} EUR</p>
+        <button class="btn-secondary" type="button" data-delete-offer="${escapeHTML(offer.id)}" data-offer-type="${escapeHTML(offer.type)}">
+          Supprimer
+        </button>
       </article>
     `).join("");
   } catch (error) {
@@ -1257,6 +1348,33 @@ if (providerForm) {
       setTypedMessage(providerMessage, error.message, "error");
     }
   });
+
+  providerOffers.addEventListener("click", async (event) => {
+    const button = event.target.closest("[data-delete-offer]");
+    if (!button) {
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append("id", button.dataset.deleteOffer);
+    formData.append("type", button.dataset.offerType);
+
+    try {
+      const response = await fetch("../backend/api/prestataire-delete-offre.php", {
+        method: "POST",
+        body: formData,
+        credentials: "include",
+      });
+      const data = await response.json();
+      if (!response.ok || !data.success) {
+        throw new Error(data.message || "Suppression impossible.");
+      }
+      setTypedMessage(providerMessage, data.message, "success");
+      loadProviderOffers();
+    } catch (error) {
+      setTypedMessage(providerMessage, error.message, "error");
+    }
+  });
 }
 
 const adminCounts = document.querySelector("[data-admin-counts]");
@@ -1280,10 +1398,15 @@ function renderAdmin(data) {
   adminUsers.innerHTML = data.users.map((user) => `
     <article>
       <h3>${escapeHTML(user.prenom)} ${escapeHTML(user.nom)}</h3>
-      <p>${escapeHTML(user.email)} · ${escapeHTML(user.role)} · ${escapeHTML(user.statut_compte)}</p>
+      <p>${escapeHTML(user.email)} - ${escapeHTML(user.role)} - ${escapeHTML(user.statut_compte)}</p>
       <button class="btn-secondary" type="button" data-user-status="${escapeHTML(user.id_utilisateur)}" data-next-status="${user.statut_compte === "actif" ? "bloque" : "actif"}">
         ${user.statut_compte === "actif" ? "Bloquer" : "Activer"}
       </button>
+      <select data-user-role="${escapeHTML(user.id_utilisateur)}">
+        <option value="voyageur" ${user.role === "voyageur" ? "selected" : ""}>Voyageur</option>
+        <option value="prestataire" ${user.role === "prestataire" ? "selected" : ""}>Prestataire</option>
+        <option value="admin" ${user.role === "admin" ? "selected" : ""}>Admin</option>
+      </select>
     </article>
   `).join("");
 }
@@ -1316,6 +1439,33 @@ if (adminCounts) {
     const formData = new FormData();
     formData.append("id_utilisateur", button.dataset.userStatus);
     formData.append("statut_compte", button.dataset.nextStatus);
+
+    try {
+      const response = await fetch("../backend/api/admin-update-user.php", {
+        method: "POST",
+        body: formData,
+        credentials: "include",
+      });
+      const data = await response.json();
+      if (!response.ok || !data.success) {
+        throw new Error(data.message || "Modification impossible.");
+      }
+      setTypedMessage(adminMessage, data.message, "success");
+      loadAdmin();
+    } catch (error) {
+      setTypedMessage(adminMessage, error.message, "error");
+    }
+  });
+
+  adminUsers.addEventListener("change", async (event) => {
+    const select = event.target.closest("[data-user-role]");
+    if (!select) {
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append("id_utilisateur", select.dataset.userRole);
+    formData.append("role", select.value);
 
     try {
       const response = await fetch("../backend/api/admin-update-user.php", {

@@ -7,14 +7,14 @@ require_once __DIR__ . '/../helpers/response.php';
 require_once __DIR__ . '/../helpers/session.php';
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    sendError('Méthode non autorisée.', 405);
+    sendError('Methode non autorisee.', 405);
 }
 
 $user = requireRole('voyageur');
 $reservationId = (int) ($_POST['id_reservation'] ?? 0);
 
 if ($reservationId <= 0) {
-    sendError('Réservation invalide.');
+    sendError('Reservation invalide.');
 }
 
 try {
@@ -36,7 +36,31 @@ try {
     $reservation = $statement->fetch();
 
     if (!$reservation) {
-        sendError('Réservation introuvable ou déjà confirmée.', 404);
+        sendError('Reservation introuvable ou deja confirmee.', 404);
+    }
+
+    $transports = $pdo->prepare('SELECT id_transport FROM itineraire_transport WHERE id_itineraire = :id');
+    $transports->execute(['id' => $reservation['id_itineraire']]);
+    foreach ($transports->fetchAll() as $transport) {
+        $pdo->prepare('UPDATE transport SET places_disponibles = places_disponibles + 1 WHERE id_transport = :id')
+            ->execute(['id' => $transport['id_transport']]);
+    }
+
+    $hebergements = $pdo->prepare('SELECT id_hebergement FROM itineraire_hebergement WHERE id_itineraire = :id');
+    $hebergements->execute(['id' => $reservation['id_itineraire']]);
+    foreach ($hebergements->fetchAll() as $hebergement) {
+        $pdo->prepare('UPDATE hebergement SET disponibilite = 1 WHERE id_hebergement = :id')
+            ->execute(['id' => $hebergement['id_hebergement']]);
+    }
+
+    $activites = $pdo->prepare('SELECT id_activite, nombre_participants FROM itineraire_activite WHERE id_itineraire = :id');
+    $activites->execute(['id' => $reservation['id_itineraire']]);
+    foreach ($activites->fetchAll() as $activite) {
+        $pdo->prepare('UPDATE activite SET places_disponibles = places_disponibles + :participants WHERE id_activite = :id')
+            ->execute([
+                'participants' => $activite['nombre_participants'],
+                'id' => $activite['id_activite'],
+            ]);
     }
 
     $deleteReservation = $pdo->prepare('DELETE FROM reservation WHERE id_reservation = :id');
@@ -49,12 +73,12 @@ try {
 
     sendJson([
         'success' => true,
-        'message' => 'Voyage retiré du panier.',
+        'message' => 'Voyage retire du panier.',
     ]);
 } catch (Throwable $error) {
     if (isset($pdo) && $pdo->inTransaction()) {
         $pdo->rollBack();
     }
 
-    sendError('Impossible de supprimer la réservation.', 500);
+    sendError('Impossible de supprimer la reservation.', 500);
 }

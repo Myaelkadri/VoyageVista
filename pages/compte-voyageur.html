@@ -33,12 +33,12 @@
             <h1 id="dashboard-title">Tableau de bord</h1>
             <p class="dashboard-user" data-dashboard-user>Connectez-vous pour afficher votre espace.</p>
           </div>
-          <button class="btn-secondary is-hidden" type="button" data-logout-button>Se déconnecter</button>
+          <button class="btn-secondary is-hidden" type="button" data-logout-button>Se deconnecter</button>
         </div>
 
         <div class="dashboard-grid">
           <article class="dashboard-card">
-            <span>Réservation active</span>
+            <span>Reservation active</span>
             <h3>Chargement...</h3>
             <p>Vos informations arrivent.</p>
           </article>
@@ -47,7 +47,7 @@
         <div class="management-grid">
           <article>
             <h3>Panier voyageur</h3>
-            <p>Consulter les séjours en attente, retirer une réservation ou passer au paiement.</p>
+            <p>Consulter les sejours en attente, retirer une reservation ou passer au paiement.</p>
             <a href="panier.html">Voir le panier</a>
           </article>
           <article>
@@ -56,6 +56,23 @@
             <a href="destinations.html">Voir les destinations</a>
           </article>
         </div>
+
+        <section class="management-grid" data-notifications-list aria-label="Notifications">
+          <article>
+            <h3>Notifications</h3>
+            <p>Chargement des notifications...</p>
+          </article>
+        </section>
+
+        <form class="login-panel profile-panel" action="../backend/api/update-profile.php" method="post" data-profile-form>
+          <p class="eyebrow">Profil</p>
+          <h2>Modifier mes informations</h2>
+          <label><span>Prenom</span><input type="text" name="prenom" data-profile-prenom required></label>
+          <label><span>Nom</span><input type="text" name="nom" data-profile-nom required></label>
+          <label><span>Telephone</span><input type="text" name="telephone" data-profile-telephone></label>
+          <button class="btn-primary" type="submit">Sauvegarder</button>
+          <p class="form-message" data-profile-message aria-live="polite"></p>
+        </form>
       </section>
     </section>
   </main>

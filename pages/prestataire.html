@@ -21,14 +21,26 @@
 
   <main>
     <section class="account-layout" aria-label="Espace prestataire">
-      <form class="login-panel" action="../backend/api/prestataire-create-activite.php" method="post" data-provider-form>
+      <form class="login-panel" action="../backend/api/prestataire-create-offre.php" method="post" data-provider-form>
         <p class="eyebrow">Nouvelle offre</p>
-        <h1>Ajouter une activité</h1>
-        <label><span>Nom</span><input type="text" name="nom_activite" required></label>
-        <label><span>Catégorie</span><input type="text" name="categorie" placeholder="Gastronomie"></label>
+        <h1>Ajouter une offre</h1>
+        <label><span>Type d'offre</span>
+          <select name="type_offre">
+            <option value="activite">Activite</option>
+            <option value="hebergement">Hebergement</option>
+            <option value="transport">Transport</option>
+          </select>
+        </label>
+        <label><span>Nom / compagnie</span><input type="text" name="nom" required></label>
+        <label><span>Categorie / type</span><input type="text" name="categorie" placeholder="Gastronomie, Hotel, Vol"></label>
         <label><span>Description</span><input type="text" name="description" required></label>
         <label><span>Prix</span><input type="number" name="prix" min="1" required></label>
-        <label><span>Durée</span><input type="text" name="duree" placeholder="2h"></label>
+        <label><span>Duree</span><input type="text" name="duree" placeholder="2h"></label>
+        <label><span>Capacite / places</span><input type="number" name="places" value="4" min="1"></label>
+        <label><span>Ville depart</span><input type="text" name="ville_depart" value="Paris"></label>
+        <label><span>Ville arrivee</span><input type="text" name="ville_arrivee" placeholder="Kyoto"></label>
+        <label><span>Date depart</span><input type="datetime-local" name="date_depart"></label>
+        <label><span>Date arrivee</span><input type="datetime-local" name="date_arrivee"></label>
         <label><span>ID destination</span><input type="number" name="id_destination" value="1" min="1" required></label>
         <button class="btn-primary" type="submit">Publier</button>
         <p class="form-message" data-provider-message aria-live="polite"></p>
