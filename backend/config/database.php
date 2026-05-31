@@ -1,7 +1,7 @@
 <?php
 
 declare(strict_types=1);
-
+ 
 function getDatabaseConnection(): PDO
 {
     $host = getenv('DB_HOST') ?: 'localhost';
